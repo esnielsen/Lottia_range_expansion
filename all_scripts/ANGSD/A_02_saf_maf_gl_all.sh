@@ -39,7 +39,6 @@ angsd -P $NB_CPU -nQueueSize 50 \
 -b angsd/02_info/bam.filelist \
 -out angsd/03_saf_maf_gl_all/all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"
 
-
 #main features
 #-P nb of threads -nQueueSize maximum waiting in memory (to optimize CPU usage)
 # -doMaf 1 (allele frequencies)  -dosaf (prior for SFS) -GL (Genotype likelihood 2 GATK method - export GL in beagle format  -doGLF2) 
