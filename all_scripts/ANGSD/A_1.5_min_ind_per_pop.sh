@@ -28,10 +28,12 @@ echo $i
 
 #mkdir 06_saf_maf_by_pop/$i
 
+#This will give you min ind per population, which can then be added to the config file
 N_IND=$(wc -l angsd/02_info/"$i"bam.filelist | cut -d " " -f 1)
 MIN_IND_FLOAT=$(echo "($N_IND * $PERCENT_IND)"| bc -l)
 MIN_IND=${MIN_IND_FLOAT%.*} 
 
-#This will give you min ind per population, which can then be added to the config file
+echo "working on pop $i, $N_IND individuals, will use the sites file provided"
+echo "will filter for sites with at least one read in $MIN_IND individuals, which is $PERCENT_IND of the total"
 
 done
