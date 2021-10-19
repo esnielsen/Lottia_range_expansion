@@ -54,14 +54,7 @@ echo "from the maf file, extract a list of SNP chr, positoin, major all, minor a
 # zip maf files
 gunzip angsd/03_saf_maf_gl_all/all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR".mafs.gz 
 
-# the following will make a list of sites (the SNPs we just called) and index it, for downstream analyses
-INFILE=angsd/03_saf_maf_gl_all/all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR".mafs
-OUTFILE_sites=angsd/02_info/sites_all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"
-OUTFILE_regions=angsd/02_info/regions_all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"
 
-Rscript angsd/Rscripts/make_sites_list_maxdepth_simple.R "$INFILE" "$OUTFILE_sites" "$OUTFILE_regions"
-
-angsd sites index $OUTFILE_sites
 
 
 
