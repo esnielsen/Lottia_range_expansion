@@ -13,6 +13,6 @@ set -x
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
 
-chmod +x A_13_fst_pop_nMAF.sh
+chmod +x A_13_fst_pop.sh
 
-singularity exec /ocean/projects/deb200006p/enielsen/LGwork/singularity-recipes_angsd_v0.933.sif /ocean/projects/deb200006p/enielsen/LGwork/A_13_fst_pop_nMAF.sh
+singularity exec /ocean/projects/deb200006p/enielsen/LGwork/singularity-recipes_angsd_v0.933.sif /ocean/projects/deb200006p/enielsen/LGwork/A_13_fst_pop.sh
