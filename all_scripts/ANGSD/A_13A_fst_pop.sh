@@ -32,10 +32,10 @@ MIN_IND=3 #edit based on the 'A_02.C_min_ind_per_pop.sh' output
 #make a folder in which write new results
 #mkdir angsd/07_fst_by_pop_pair/$GROUP
 
-#1 subset bamfilelist
+#1 subset bamfilelist (only if you want to subsample to same # of individuals per pop)
 Rscript angsd/Rscripts/subset_random_Nind.r "$GROUP"
 
-#2 do saf for all population listed
+#2 do saf for all population listed (remember we are making SFS here so we don't want to have MAF or p-value filters)
 cat $POP_FILE1 | while read i
 do
 echo $i
@@ -50,7 +50,7 @@ angsd -P $NB_CPU -nQueueSize 50 \
 -b angsd/07_fst_by_pop_pair/$GROUP/"$i"subsetbam.filelist -out angsd/07_fst_by_pop_pair/$GROUP/"$i"_saf
 done
 
-# 3 calculate FST
+# 3 Create SFSs
 #prepare variables - avoid to modify
 num_pops=$(wc -l "$POP_FILE1" | cut -d " " -f 1)
 
@@ -75,8 +75,5 @@ angsd/07_fst_by_pop_pair/$GROUP/"$pop2"_saf.saf.idx \
 	done
 done
 
-## Need to run sum_sites_2dsfs.r R script before going on to A_13B_fst_pop.sh
-
-#file=07_fst_by_pop_pair/$GROUP/"$pop1"_"$pop2"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"."$NSITES"
 
 
