@@ -39,9 +39,23 @@ angsd -P $NB_CPU -nQueueSize 50 \
 -b angsd/02_info/bam.filelist \
 -out angsd/03_saf_maf_gl_all/all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"
 
+
+#main features
+#-P nb of threads -nQueueSize maximum waiting in memory (to optimize CPU usage)
+# -doMaf 1 (allele frequencies)  -dosaf (prior for SFS) -GL (Genotype likelihood 2 GATK method - export GL in beagle format  -doGLF2) 
+# -doMajorMinor 1 use the most frequent allele as major -doCounts 1 to get allele counts
+# -anc provide a ancestral sequence = reference in our case -fold 1 (we want to fold since we have reference instead of ancestral) 
+# then have a bunch of different filtering parameters (OPTIONAL): removing bad, triallelic, non-unique, non-paired, bad quality reads
+# -rf (file with the region written) i.e. work on a defined region : OPTIONAL
+# -b (bamlist) input file
+# -out  output file
+
 echo "from the maf file, extract a list of SNP chr, positoin, major all, minor all"
+
+# zip maf files
 gunzip angsd/03_saf_maf_gl_all/all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR".mafs.gz 
 
+# the following will make a list of sites (the SNPs we just called) and index it, for downstream analyses
 INFILE=angsd/03_saf_maf_gl_all/all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR".mafs
 OUTFILE_sites=angsd/02_info/sites_all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"
 OUTFILE_regions=angsd/02_info/regions_all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"
@@ -49,4 +63,6 @@ OUTFILE_regions=angsd/02_info/regions_all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_max
 Rscript angsd/Rscripts/make_sites_list_maxdepth_simple.R "$INFILE" "$OUTFILE_sites" "$OUTFILE_regions"
 
 angsd sites index $OUTFILE_sites
+
+
 
