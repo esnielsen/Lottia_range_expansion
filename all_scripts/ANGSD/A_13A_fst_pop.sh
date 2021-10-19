@@ -74,3 +74,9 @@ angsd/07_fst_by_pop_pair/$GROUP/"$pop2"_saf.saf.idx \
 
 	done
 done
+
+## Need to run sum_sites_2dsfs.r R script before going on to A_13B_fst_pop.sh
+
+#file=07_fst_by_pop_pair/$GROUP/"$pop1"_"$pop2"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"."$NSITES"
+
+
