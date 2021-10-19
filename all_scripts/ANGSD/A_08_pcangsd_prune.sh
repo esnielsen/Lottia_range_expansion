@@ -28,7 +28,7 @@ source A_01_config.sh
 #this is the list of file we are working on
 BAM_LIST=angsd/02_info/bam.filelist
 
-#this is the pruned input file for the pca (from A_07_angsd_prune.sh)
+#this is the pruned input file for the pca (from A_6.5_LD_prune.sh)
 INPUT=angsd/03_saf_maf_gl_all/all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"_pruned.beagle.gz
 
 echo "analyse covariance matrix on all individuals"
