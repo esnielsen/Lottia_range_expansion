@@ -13,6 +13,6 @@ set -x
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
 
-chmod +x A_5_maf_gl_for_pruning.sh
+chmod +x A_05_maf_gl_for_pruning.sh
 
-singularity exec /ocean/projects/deb200006p/enielsen/LGwork/singularity-recipes_angsd_v0.933.sif /ocean/projects/deb200006p/enielsen/LGwork/A_5_maf_gl_for_pruning.sh 
+singularity exec /ocean/projects/deb200006p/enielsen/LGwork/singularity-recipes_angsd_v0.933.sif /ocean/projects/deb200006p/enielsen/LGwork/A_05_maf_gl_for_pruning.sh 
