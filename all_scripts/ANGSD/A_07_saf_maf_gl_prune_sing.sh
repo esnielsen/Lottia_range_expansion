@@ -8,11 +8,11 @@
 set -e
 set -x
 # To Run
-# sbatch A_03_saf_maf_gl_PRUNE_sing.sh
+# sbatch A_07_saf_maf_gl_PRUNE_sing.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
 
-chmod +x A_7_saf_maf_gl_prune.sh
+chmod +x A_07_saf_maf_gl_prune.sh
 
-singularity exec /ocean/projects/deb200006p/enielsen/LGwork/singularity-recipes_angsd_v0.933.sif /ocean/projects/deb200006p/enielsen/LGwork/A_7_saf_maf_gl_prune.sh
+singularity exec /ocean/projects/deb200006p/enielsen/LGwork/singularity-recipes_angsd_v0.933.sif /ocean/projects/deb200006p/enielsen/LGwork/A_07_saf_maf_gl_prune.sh
