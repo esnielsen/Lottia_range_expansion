@@ -8,12 +8,12 @@
 set -e
 set -x
 # To Run
-# sbatch A_06_LD_prune.sh
+# sbatch A_06_plink_prune.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
 
-# Call fastp package
+# Call package
 module load anaconda3
 eval "$(conda shell.bash hook)"
 conda activate plink
