@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch A_4.5.5_pcangsd_vis.sh
+# sbatch A_03.B_pcangsd_vis.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
