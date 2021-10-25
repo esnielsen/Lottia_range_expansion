@@ -19,7 +19,7 @@ conda activate ANGSD
 
 ## Run this script if you just want to get the sites and region files for MAF scripts
 
-source 01_config.sh
+source A_01_config.sh
 
 echo "from the maf file, extract a list of SNP chr, positoin, major all, minor all"
 #gunzip angsd/03_saf_maf_gl_all/all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR".mafs.gz 
