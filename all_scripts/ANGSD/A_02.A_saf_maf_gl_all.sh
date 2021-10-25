@@ -9,12 +9,12 @@
 set -e
 set -x
 # To Run
-# sbatch A_02_saf_maf_gl_all.sh
+# sbatch A_02.A_saf_maf_gl_all.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
 
-# Call fastp package
+# Call package
 module load anaconda3
 eval "$(conda shell.bash hook)"
 conda activate ANGSD
