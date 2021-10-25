@@ -8,13 +8,12 @@
 set -e
 set -x
 # To Run
-# sbatch A_05_saf_maf_pop.sh
+# sbatch A_12_saf_maf_pop.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
 
-###this script will work on bamfiles by population and calculate saf  & maf 
-#maybe edit
+###this script will work on bamfiles by population and calculate saf  & maf per individual populations
 NB_CPU=3 #change accordingly in SLURM header
 POP_FILE1=angsd/02_info/pop.txt #choose on which list of pop run the analyses
 
@@ -29,7 +28,7 @@ echo $i
 #mkdir 06_saf_maf_by_pop/$i
 #MIN_IND=$(echo $i"_minIND")
 
-# NB: Not sure if we want to do MAF filtering here??? Depends on if we use output for SFS or not....
+# NB: Not sure if we want to do MAF filtering here??? Depends on if we use output for SFS, so if being used to calculate FSTs/thetas then we don't want min MAF, p-value filters
 angsd -P $NB_CPU -nQueueSize 50 \
 -doMaf 1 -dosaf 1 -GL 2 -doMajorMinor 3 \
 -anc 03_genome/Lottia_gigantea.Lotgi1.dna.toplevel.fa \
