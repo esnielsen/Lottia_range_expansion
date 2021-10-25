@@ -9,19 +9,18 @@
 set -e
 set -x
 # To Run
-# sbatch A_03_pcangsd_all.sh
+# sbatch A_03.A_pcangsd_all.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
 
 module load python3.8.6
 
-# Call fastp package
+# Call package
 module load anaconda3
 eval "$(conda shell.bash hook)"
 conda activate numpy
 
-#maybe edit
 NB_CPU=1 #change accordingly in SLURM header
 
 #prepare variables - avoid to modify
