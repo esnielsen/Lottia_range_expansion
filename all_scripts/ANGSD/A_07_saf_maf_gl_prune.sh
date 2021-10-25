@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch A_02_saf_maf_gl_PRUNE.sh
+# sbatch A_07_saf_maf_gl_prune.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
@@ -19,7 +19,6 @@ cd /ocean/projects/deb200006p/enielsen/LGwork
 NB_CPU=5 #change accordingly in SLURM header
 #REGIONS="-rf 02_info/regions_25kb_100snp.txt" #optional edit with your region selected file
 #REGIONS=" " # to remove the options to focus on a limited number of regions
-
 
 #prepare variables - avoid to modify
 source A_01_config.sh
@@ -38,7 +37,7 @@ Rscript 01_scripts/Rscripts/make_site_list_pruned.r "$INPUT_plink" "$INPUT_angsd
 angsd sites index "$INPUT_angsd"_pruned
 
 ####Calculate the SAF, MAF and GL
-#we now use a list of snp corresponding to the LD-pruned snp by plink and removing the areas of inversions
+#we now use a list of snp corresponding to the LD-pruned snps by plink to create final SNP set
 
 angsd -P $NB_CPU -nQueueSize 50 \
 -doMaf 1 -dosaf 1 -GL 2 -doGlf 2 -doMajorMinor 3 -doGeno 2 -doPost 1 \
