@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch A_05_admix_PRUNE.sh
+# sbatch A_09_admix_prune.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
@@ -21,7 +21,6 @@ conda activate ANGSD
 NB_CPU=2 #change accordingly in SLURM header
 
 source A_01_config.sh
-
 
 ##Run for MIN_K to MAX_K (from config.sh file)
 
