@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch A_4.5_pcangsd_PRUNE.sh
+# sbatch A_08_pcangsd_prune.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
