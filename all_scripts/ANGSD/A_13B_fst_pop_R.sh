@@ -39,7 +39,7 @@ file=07_fst_by_pop_pair/$GROUP/"$pop1"_"$pop2"_maf"$MIN_MAF"_pctind"$PERCENT_IND
 
 Rscript 01_scripts/Rscripts/sum_sites_2dsfs.r "$file"
 
-## Below is what I've actually done...
+##Or if you want to just run on single population pair...
 file=angsd/07_fst_by_pop_pair/$GROUP/fold_nMAF/BMR_C_maf0.05_pctind0.5_maxdepth4_fold_nMAF.500000
 
 Rscript angsd/Rscripts/sum_sites_2dsfs.r "$file"
