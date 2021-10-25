@@ -8,15 +8,14 @@
 set -e
 set -x
 # To Run
-# sbatch A_5.5_pop_ind.sh
+# sbatch A_02.C_min_ind_per_pop.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
 
 ###this script will work on bamfiles by population and calculate saf  & maf 
-#maybe edit
 NB_CPU=1 #change accordingly in SLURM header
-POP_FILE1=angsd/02_info/pop.txt #choose on which list of pop run the analyses
+POP_FILE1=angsd/02_info/pop.txt #choose on which list of pops to run the analyses
 
 #prepare variables - avoid to modify
 source A_01_config.sh
