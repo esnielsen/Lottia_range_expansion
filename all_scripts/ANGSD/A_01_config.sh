@@ -9,7 +9,7 @@
 set -e
 set -x
 # To Run
-# sbatch 01_config.sh
+# sbatch A_01_config.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
