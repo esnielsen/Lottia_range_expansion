@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch A_9_inbred_pop.sh
+# sbatch A_11_ngsF_inbred.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
