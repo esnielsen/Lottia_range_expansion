@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch A_9_ngsF_saf.sh
+# sbatch A_10_saf_for_ngsF_.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
@@ -18,7 +18,7 @@ module load anaconda3
 eval "$(conda shell.bash hook)"
 conda activate ANGSD
 
-###this script will work on bamfiles by population and calculate saf  & maf 
+###this script will work on bamfiles by population and calculate saf/mafs for inbreeding analyses
 NB_CPU=8 #change accordingly in SLURM header
 POP_FILE1=angsd/02_info/pop.txt #choose on which list of pop run the analyses
 
@@ -30,7 +30,8 @@ cat $POP_FILE1 | while read i
 do
 echo $i
 
-#mkdir 06_saf_maf_by_pop/$i
+#make a directory for each population
+mkdir 06_saf_maf_by_pop/$i
 
 N_IND=$(wc -l 02_info/"$i"bam.filelist | cut -d " " -f 1)
 MIN_IND_FLOAT=$(echo "($N_IND * $PERCENT_IND)"| bc -l)
