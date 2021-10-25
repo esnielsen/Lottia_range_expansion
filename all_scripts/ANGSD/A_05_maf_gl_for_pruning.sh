@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch A_8_angsd_LD.sh
+# sbatch A_05_maf_gl_for_pruning.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
@@ -18,7 +18,7 @@ REGIONS="-rf angsd/02_info/regions_all_maf0.05_pctind0.5_maxdepth4"
 
 source A_01_config.sh
 
-####Calculate the MAF and GL
+####Calculate the MAF and GL, with Plink output for LD pruning
 
 angsd -P $NB_CPU -nQueueSize 50 -doPlink 2 -doMaf 1 -doCounts 1 \
 -GL 2 -doMajorMinor 1 -doGeno -4 -doPost 1 -postCutoff 0.8 \
