@@ -16,13 +16,14 @@ cd /ocean/projects/deb200006p/enielsen/LGwork
 #prepare variables - avoid to modify
 source A_01_config.sh
 
-#maybe edit
+#set up files
 NB_CPU=1 #change accordingly in SLURM header
 NSITES=500000 #to make realSFS goes faster -reduce the number of sites considered 
 GROUP=pop #this relates to the 'pop.txt' file in the '02_info' directory
 POP_FILE1=angsd/02_info/"$GROUP".txt #choose on which list of pop run the analyses
 
-# calculate FST
+# This is the last step to calculate FST, in which we use a sliding window approach
+
 #prepare variables - avoid to modify
 num_pops=$(wc -l "$POP_FILE1" | cut -d " " -f 1)
 
@@ -52,7 +53,7 @@ angsd/07_fst_by_pop_pair/$GROUP/"$pop2"_saf.saf.idx \
 		realSFS fst stats angsd/07_fst_by_pop_pair/$GROUP/"$pop1"_"$pop2"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"_nMAF.fst.idx \
 -P $NB_CPU > angsd/07_fst_by_pop_pair/$GROUP/"$pop1"_"$pop2"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"_nMAF.fst
 		
-		echo "calculate FST by slidingwindow, window size=$WINDOW and step=$WINDOW_STEP, as given in 01_config.sh"
+		echo "calculate FST by slidingwindow, window size=$WINDOW and step=$WINDOW_STEP, as given in A_01_config.sh"
 		realSFS  fst stats2 angsd/07_fst_by_pop_pair/$GROUP/"$pop1"_"$pop2"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"_nMAF.fst.idx \
 -win $WINDOW -step $WINDOW_STEP -P $NB_CPU > angsd/07_fst_by_pop_pair/$GROUP/"$pop1"_"$pop2"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"_nMAF.slidingwindow
 	done
