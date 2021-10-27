@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch D_2_recode.sh
+# sbatch RE_1_make_bin.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
