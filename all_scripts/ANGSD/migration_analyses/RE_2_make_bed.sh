@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch D_2_makebed.sh
+# sbatch RE_2_make_bed.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
