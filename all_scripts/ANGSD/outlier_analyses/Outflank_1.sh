@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch O_outflank_1.sh
+# sbatch Outflank_1.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
