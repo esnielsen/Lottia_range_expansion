@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch D_BA3.sh
+# sbatch BA3_2_run.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
