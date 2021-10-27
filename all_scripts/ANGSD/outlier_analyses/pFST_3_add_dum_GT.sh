@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch O_dummyGT.sh
+# sbatch pFST_3_add_dum_GT.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
