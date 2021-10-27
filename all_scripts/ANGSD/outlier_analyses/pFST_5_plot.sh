@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch O_pfst_plot.sh
+# sbatch pFST_5_plot.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
