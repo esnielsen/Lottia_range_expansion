@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch A_7_thetas_prep_sing.sh
+# sbatch A_14A_thetas_sing.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
