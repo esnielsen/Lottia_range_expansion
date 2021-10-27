@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch A_06_fst_nMAF_sing_2.sh
+# sbatch A_13C_fst_pop_sing.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
