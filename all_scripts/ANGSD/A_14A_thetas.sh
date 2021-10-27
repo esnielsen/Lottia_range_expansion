@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch A_7_thetas_prep.sh
+# sbatch A_14A_thetas.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
@@ -26,13 +26,13 @@ source A_01_config.sh
 cat $POP_FILE1 | while read i
 do
 
-	#unsure whether we should specify the sites & filter for the thetas too??
+	#Estimate SFS per pop for theta calculations, again relaxing filters
 	echo "working on pop $i, $N_IND individuals"
 	echo "will filter for sites with at least one read in $MIN_IND individuals, which is $PERCENT_IND of the total"
 	
-	#we need to re-do doSaf because we don't want to filter on maf for thetas calculation
-	#I don't use the fold option anymore - but be aware that only T watterson and Taj D are interpretable if anc is the ref genome
-	angsd -P $NB_CPU -underFlowProtect 1 \
+	#The fold option isn't used, so be aware that only T watterson and Taj D are interpretable if anc is the ref genome
+	#We also turn on 'underflow protection', as for large data sets (large number of individuals) underflow projection is needed for SFS
+	angsd -P $NB_CPU -underFlowProtect 1 \ 
 	-dosaf 1 -GL 2 -doMajorMinor 1 -doCounts 1 \
 	-anc 03_genome/Lottia_gigantea.Lotgi1.dna.toplevel.fa \
 	-uniqueOnly 1 -remove_bads 1 -skipTriallelic 1 -only_proper_pairs 1 -minMapQ 30 -minQ 20 -minInd 3 -setMaxDepth 12 \
