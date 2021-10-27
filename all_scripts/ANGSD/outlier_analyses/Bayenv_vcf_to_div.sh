@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch O_vcf_div.sh
+# sbatch Bayenv_vcf_to_div.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
