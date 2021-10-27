@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch D_rangeExp.sh
+# sbatch RE_3_run.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
