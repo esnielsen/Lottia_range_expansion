@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch D1_gl_2_gpop.sh
+# sbatch BA3_1_gl_to_gpop.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
