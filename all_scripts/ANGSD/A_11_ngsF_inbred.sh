@@ -18,7 +18,7 @@ POP_FILE1=angsd/02_info/pop.txt #choose on which list of pop run the analyses
 
 source A_01_config.sh
 
-#Number of sam files??
+#Identify the number of samples 
 NSAMS=3
 
 # Do saf/maf for all population listed
