@@ -7,7 +7,7 @@
 set -e
 set -x
 # To Run
-# sbatch sam_validate.sh
+# sbatch validate_sam.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork/tester
