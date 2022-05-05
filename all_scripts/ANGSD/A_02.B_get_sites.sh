@@ -17,7 +17,11 @@ module load anaconda3
 eval "$(conda shell.bash hook)"
 conda activate ANGSD
 
-## Run this script if you just want to get the sites and region files for MAF scripts
+## Run this script if you want to get the sites and region files for MAF scripts
+# 1) extract SNP which passed the MIN_MAF and PERCENT_IND filters & their Major-minor alleles
+# 2) order the sites file by chromosome names 
+# 3) makes a region file matching the sites files and with same order
+# 4) index sites file
 
 source A_01_config.sh
 
