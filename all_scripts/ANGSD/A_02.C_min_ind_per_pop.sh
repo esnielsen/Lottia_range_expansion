@@ -13,7 +13,10 @@ set -x
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
 
-###this script will work on bamfiles by population and calculate saf  & maf 
+### This script is for working on population-level analyses. 
+# It should give you the min # of individuals per pop for filter -minInd (min # of individuals with at least one read at this locus)- set to 50%
+# I had to run this script separately for each population, but if all pops have same # of individs, you can ignore 
+
 NB_CPU=1 #change accordingly in SLURM header
 POP_FILE1=angsd/02_info/pop.txt #choose on which list of pops to run the analyses
 
