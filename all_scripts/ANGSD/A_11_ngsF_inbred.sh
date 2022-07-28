@@ -16,12 +16,12 @@ cd /ocean/projects/deb200006p/enielsen/LGwork
 NB_CPU=4 #change accordingly in SLURM header
 POP_FILE1=angsd/02_info/pop.txt #choose on which list of pop run the analyses
 
-source A_01_config.sh
+source A_01.A_config.sh
 
 #Identify the number of samples 
 NSAMS=3
 
-# Do saf/maf for all population listed
+# Run ngsTools/ngsF for all population listed
 cat $POP_FILE1 | while read i
 do
 echo $i
@@ -31,7 +31,8 @@ echo $i
 
 	# preliminary search
 	zcat angsd/06_saf_maf_by_pop/"$i"/"$i"_maf0.05_pctind0.5_maxdepth4_inbreed.glf.gz | ./ngsTools/ngsF/ngsF --n_ind $NSAMS --n_sites $NSITES --glf - --out angsd/06_saf_maf_by_pop/"$i"/"$i".approx_indF --approx_EM --init_values u --n_threads 4
-
+	
+	# calc inbreeding
 	zcat angsd/06_saf_maf_by_pop/"$i"/"$i"_maf0.05_pctind0.5_maxdepth4_inbreed.glf.gz | ./ngsTools/ngsF/ngsF --n_ind $NSAMS --n_sites $NSITES --glf - --out angsd/06_saf_maf_by_pop/"$i"/"$i".indF --init_values angsd/06_saf_maf_by_pop/"$i"/"$i".approx_indF.pars --n_threads 4 
 
 	cat angsd/06_saf_maf_by_pop/"$i"/"$i".indF
