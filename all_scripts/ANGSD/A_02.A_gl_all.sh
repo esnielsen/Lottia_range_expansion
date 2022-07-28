@@ -35,7 +35,7 @@ echo "filter on allele frequency = $MIN_MAF"
 #Working script
 angsd -P $NB_CPU -nQueueSize 50 \
 -doMaf 1 -dosaf 1 -GL 2 -doGlf 2 -doMajorMinor 1 -doCounts 1 \
--anc 03_genome/Lottia_gigantea.Lotgi1.dna.toplevel.fa -remove_bads 1 -skipTriallelic 1 -SNP_pval 1e-6 -uniqueOnly 1 -only_proper_pairs 1 -sb_pval 1e-5 -hetbias_pval 1e-5 -dosnpstat 1 -doHWE 1 -minMapQ 30 -minQ 20 \
+-anc 03_genome/Lottia_gigantea.Lotgi1.dna.toplevel.fa -remove_bads 1 -baq 1 -skipTriallelic 1 -SNP_pval 1e-6 -uniqueOnly 1 -only_proper_pairs 1 -sb_pval 1e-5 -hetbias_pval 1e-5 -dosnpstat 1 -doHWE 1 -minMapQ 30 -minQ 20 \
 -minInd $MIN_IND -minMaf $MIN_MAF -setMaxDepth $MAX_DEPTH \
 -b 02_info/bam.filelist \
 -out angsd/03_saf_maf_gl_all/CA_all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"
