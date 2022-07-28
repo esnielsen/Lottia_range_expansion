@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch A_15_gl_for_RDA.sh
+# sbatch A_15A_gl_for_RDA.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
