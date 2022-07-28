@@ -32,9 +32,9 @@ BAM_LIST=02_info/bam.filelist
 INPUT=angsd/03_saf_maf_gl_all/all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"_pruned.beagle.gz
 
 echo "analyse covariance matrix on all individuals"
-#python3 $PCA_ANGSD_PATH/pcangsd.py -threads $NB_CPU \
-#	-beagle $INPUT -o angsd/04_pca/pruned/all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"_pruned
+python3 $PCA_ANGSD_PATH/pcangsd.py -threads $NB_CPU \
+	-beagle $INPUT -o angsd/04_pca/pruned/all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"_pruned
 
 echo "transform covariance matrix into PCA"
 COV_MAT=angsd/04_pca/pruned/all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"_pruned.cov
-Rscript Rscripts/make_pca_simple.r "$COV_MAT" "$BAM_LIST"
+
