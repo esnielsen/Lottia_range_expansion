@@ -1,0 +1,31 @@
+#### Instructions for downloading *insert program here* with conda ###
+
+# sign onto your Bridges2 environment, and then type interact to go into interactive mode 
+interact
+
+#load conda
+module load anaconda3
+
+#go into home directory
+cd $PROJECT
+
+#create your conda environment, naming it after the program
+conda create --name [insert name of program here]
+
+# only use this if you want to create with different/older version of python
+conda create -y -n moments python=2.7
+
+#will ask if you want to download into directory, choose yes
+y
+
+# now activate your conda env
+source activate [insert name of program here]
+
+# use the install code (I generally get this from googling conda install + name of program, below I'm showing it for the program fastp)
+conda install -c bioconda fastp
+
+#Now it's installed!
+
+# to use in bash script, type these lines at beginning of code
+source ~/anaconda3/etc/profile.d/conda.sh
+conda activate [insert name of program here]
