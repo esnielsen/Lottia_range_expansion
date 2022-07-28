@@ -10,7 +10,7 @@ set -x
 # sbatch treemix_mig.sh
 
 #Set up directory
-cd /ocean/projects/deb200006p/enielsen/LGwork/treemix
+cd /ocean/projects/deb200006p/enielsen/LGwork/treemix/tree_outs
 
 
 #load packages
