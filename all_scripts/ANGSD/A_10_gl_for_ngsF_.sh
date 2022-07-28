@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch A_10_saf_for_ngsF_.sh
+# sbatch A_10_gl_for_ngsF_.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
@@ -23,7 +23,7 @@ NB_CPU=8 #change accordingly in SLURM header
 POP_FILE1=angsd/02_info/pop.txt #choose on which list of pop run the analyses
 
 #prepare variables - avoid to modify
-source A_01_config.sh
+source A_01.A_config.sh
 
 # Do saf/maf for all population listed
 cat $POP_FILE1 | while read i
