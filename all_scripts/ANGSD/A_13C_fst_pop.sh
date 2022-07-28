@@ -3,7 +3,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH -J angsd_FST_2
 #SBATCH -p RM-shared
-#SBATCH -t 1:00:00
+#SBATCH -t 24:00:00
 #SBATCH --ntasks-per-node=1
 set -e
 set -x
@@ -14,13 +14,14 @@ set -x
 cd /ocean/projects/deb200006p/enielsen/LGwork
 
 #prepare variables - avoid to modify
-source A_01_config.sh
+source A_01.A_config.sh
 
 #set up files
 NB_CPU=1 #change accordingly in SLURM header
 NSITES=500000 #to make realSFS goes faster -reduce the number of sites considered 
 GROUP=pop #this relates to the 'pop.txt' file in the '02_info' directory
-POP_FILE1=angsd/02_info/"$GROUP".txt #choose on which list of pop run the analyses
+POP_FILE1=02_info/"$GROUP".txt #choose on which list of pop run the analyses
+num_pops=4
 
 # This is the last step to calculate FST, in which we use a sliding window approach
 
@@ -42,7 +43,7 @@ do
 		echo " prepare the fst for easy window analysis etc"
 		realSFS fst index angsd/07_fst_by_pop_pair/$GROUP/"$pop1"_saf.saf.idx \
 angsd/07_fst_by_pop_pair/$GROUP/"$pop2"_saf.saf.idx \
--sfs angsd/07_fst_by_pop_pair/$GROUP/nfold_nMAF/"$pop1"_"$pop2"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"_nMAF."$NSITES".2dsfs \
+-sfs angsd/07_fst_by_pop_pair/$GROUP/"$pop1"_"$pop2"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"."$NSITES".2dsfs \
 -P $NB_CPU -fstout angsd/07_fst_by_pop_pair/$GROUP/"$pop1"_"$pop2"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"_nMAF
 
 		echo "print SFS priori for each position"
