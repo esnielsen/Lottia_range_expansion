@@ -2,10 +2,10 @@
 #!/bin/bash
 #SBATCH --mail-user=esnielsen@ucdavis.edu
 #SBATCH --mail-type=ALL
-#SBATCH -J bwa_align_reads_3.5
-#SBATCH -p RM
-#SBATCH --cpus-per-task=5
-#SBATCH -t 2:00:00
+#SBATCH -J bwa_align_sbr33
+#SBATCH -p RM-shared
+#SBATCH --cpus-per-task=7
+#SBATCH -t 20:00:00
 set -e
 set -x
 # To Run
@@ -17,14 +17,14 @@ cd /ocean/projects/deb200006p/enielsen/LGwork
 # Global variables
 GENOMEFOLDER="03_genome"
 GENOME="Lottia_gigantea.Lotgi1.dna.toplevel.fa"
-RAWDATAFOLDER="05_trimmed"
-ALIGNEDFOLDER="06_aligned"
+RAWDATAFOLDER="02_FP_A_trimmed"
+ALIGNEDFOLDER="05_aligned"
 NCPU=$1
 
 # Test if user specified a number of CPUs
 if [[ -z "$NCPU" ]]
 then
-    NCPU=10
+    NCPU=7
 fi
 
 # Load needed modules
@@ -32,10 +32,10 @@ module load BWA/0.7.3a
 module load samtools/1.11.0
 
 # Index genome
-bwa index -p "$GENOMEFOLDER"/"$GENOME" "$GENOMEFOLDER"/"$GENOME"
+# bwa index -p "$GENOMEFOLDER"/"$GENOME" "$GENOMEFOLDER"/"$GENOME"
 
 # Iterate over sequence file pairs and map with bwa
-for file in $(ls -1 "$RAWDATAFOLDER"/*_1.trimmed.fastq.gz)
+for file in $(ls -1 "$RAWDATAFOLDER"/*_*_1.trimmed.fq.gz)
 do
     # Name of uncompressed file
     file2=$(echo "$file" | perl -pe 's/_1\.trimmed/_2.trimmed/')
@@ -44,7 +44,7 @@ do
     name=$(basename "$file")
     name2=$(basename "$file2")
     ID="${name%.trimmed.fastq.gz}"
-    PL=ILLUMINA
+    PL=DNBSEQ
 
     # Align reads
     bwa mem  -M -t "$NCPU" -R "@RG\tID:$ID\tSM:$ID\tPL:$PL" "$GENOMEFOLDER"/"$GENOME" "$RAWDATAFOLDER"/"$name" "$RAWDATAFOLDER"/"$name2" |
