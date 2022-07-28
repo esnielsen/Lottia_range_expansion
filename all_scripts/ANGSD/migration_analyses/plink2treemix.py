@@ -2,7 +2,10 @@
 
 import sys, os, gzip
 
-
+if len(sys.argv) < 3:
+	print "plink2treemix.py [gzipped input file] [gzipped output file]"
+	print "ERROR: improper command line"
+	exit(1)
 infile = gzip.open(sys.argv[1])
 outfile = gzip.open(sys.argv[2], "w")
 
