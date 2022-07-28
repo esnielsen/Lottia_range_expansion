@@ -4,7 +4,7 @@
 #SBATCH -J pcangsd_prune
 #SBATCH -p RM-shared
 #SBATCH -t 1:00:00
-#SBATCH --ntasks-per-node=1
+#SBATCH --ntasks-per-node=8
 set -e
 set -x
 # To Run
@@ -13,28 +13,28 @@ set -x
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
 
-module load python3.8.6
+#module load python3.8.6
 
 # Call package
 module load anaconda3
 eval "$(conda shell.bash hook)"
 conda activate numpy
 
-NB_CPU=1 #change accordingly in SLURM header
+NB_CPU=8 #change accordingly in SLURM header
 
 #prepare variables - avoid to modify
-source A_01_config.sh
+source A_01.A_config.sh
 
 #this is the list of file we are working on
-BAM_LIST=angsd/02_info/bam.filelist
+BAM_LIST=02_info/bam.filelist
 
-#this is the pruned input file for the pca (from A_7_saf_maf_gl_prune.sh)
+#this is the pruned input file for the pca (from A_7_gl_prune.sh)
 INPUT=angsd/03_saf_maf_gl_all/all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"_pruned.beagle.gz
 
 echo "analyse covariance matrix on all individuals"
-python3 $PCA_ANGSD_PATH/pcangsd.py -threads $NB_CPU \
-	-beagle $INPUT -o angsd/04_pca/all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"_pruned
+#python3 $PCA_ANGSD_PATH/pcangsd.py -threads $NB_CPU \
+#	-beagle $INPUT -o angsd/04_pca/pruned/all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"_pruned
 
 echo "transform covariance matrix into PCA"
-COV_MAT=angsd/04_pca/all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"_pruned.cov
-Rscript angsd/Rscripts/make_pca_simple.r "$COV_MAT" "$BAM_LIST"
+COV_MAT=angsd/04_pca/pruned/all_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"_pruned.cov
+Rscript Rscripts/make_pca_simple.r "$COV_MAT" "$BAM_LIST"
