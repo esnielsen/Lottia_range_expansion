@@ -3,8 +3,9 @@
 #SBATCH --mail-user=esnielsen@ucdavis.edu
 #SBATCH --mail-type=ALL
 #SBATCH -J mark_dups
-#SBATCH -p RM
-#SBATCH -t 2:00:00
+#SBATCH -p EM
+#SBATCH -t 6:00:00
+#SBATCH --ntasks-per-node=24
 set -e
 set -x
 # To Run
@@ -14,9 +15,9 @@ set -x
 cd /ocean/projects/deb200006p/enielsen/LGwork
 
 # Global variables
-ALIGNEDFOLDER="06_aligned"
-DEDUPFOLDER="07_deduplicated"
-METRICSFOLDER="98_metrics"
+ALIGNEDFOLDER="05_aligned"
+DEDUPFOLDER="06_deduplicated"
+METRICSFOLDER="dedup_metrics"
 
 # Copy script to log folder
 TIMESTAMP=$(date +%Y-%m-%d_%Hh%Mm%Ss)
