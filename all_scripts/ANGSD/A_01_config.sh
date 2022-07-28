@@ -9,13 +9,13 @@
 set -e
 set -x
 # To Run
-# sbatch A_01_config.sh
+# sbatch A_01.A_config.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
 
 #path to bam folder
-BAM_PATH=/07_deduplicated
+BAM_PATH=06_deduplicated
 
 #path to pcaangsd
 PCA_ANGSD_PATH=/ocean/projects/deb200006p/enielsen/LGwork/angsd/pcangsd/pcangsd
@@ -40,13 +40,13 @@ WINDOW=25000
 WINDOW_STEP=5000 
 
 #min nb of pop to consider for NGS admix
-K_MIN=2 
+K_MIN=1
 
 #maximum nb of pop to consider for NGS admix
-K_MAX=5 
+K_MAX=5
 
 #min ind per pop
-BMR_minIND=4
-C_minIND=5
-KR_minIND=4
-SP_minIND=5
+#BMR_minIND=4
+#C_minIND=5
+#KR_minIND=4
+#SP_minIND=5
