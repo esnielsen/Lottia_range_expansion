@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch 05_dictionary_ref.sh
+# sbatch 06_dictionary_ref.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
