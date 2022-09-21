@@ -43,8 +43,8 @@ do
         "$CLIPFOLDER"/$(basename "$file" .dedup.bam).temp.bam \
         > "$CLIPFOLDER"/$(basename "$file" .dedup.bam).no_overlap.bam
         
-    # Index bam
-    picard BuildBamIndex INPUT="$CLIPFOLDER"/$(basename "$file" .realigned.bam).no_overlap.bam
+    #not used - # Index bam
+    #picard BuildBamIndex INPUT="$CLIPFOLDER"/$(basename "$file" .realigned.bam).no_overlap.bam
         
     # Cleanup
     rm "$CLIPFOLDER"/$(basename "$file" .dedup.bam).temp.bam
