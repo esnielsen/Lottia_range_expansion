@@ -15,7 +15,7 @@ set -x
 cd /ocean/projects/deb200006p/enielsen/LGwork
 
 #path to bam folder
-BAM_PATH=07_clipped
+BAM_PATH=08_realigned
 
 #path to pcaangsd
 PCA_ANGSD_PATH=/ocean/projects/deb200006p/enielsen/LGwork/angsd/pcangsd/pcangsd
