@@ -43,6 +43,8 @@ done
 # o & O = outputs
 # outputs .json and html for qc
 
+# can also include "--cut_right" option to trim off ends of reads with low base quality within sliding windows (I tried this but didn't improve QC and led to shorter sequence lengths)
+
 # Run for single file
 #fastp -w 6 -i rawdata/fastqs/SBR_33_1.fq.gz -I rawdata/fastqs/SBR_33_2.fq.gz --adapter_sequence=AAGTCGGAGGCCAAGCGGTCTTAGGAAGACAA --adapter_sequence_r2=AAGTCGGATCGTAGCCATGTCGTTCTGTGAGCCAAGGAGTTG -o 02_FP_A_trimmed/SBR_33_1.trimA.fq.gz -O 02_FP_A_trimmed/SBR_33_2.trimA.fq.gz -j 02_FP_A_trimmed/01_reports/SBR_33_A.json -h 02_FP_A_trimmed/01_reports/SBR_33_A.html 
 
