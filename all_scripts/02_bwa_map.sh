@@ -46,6 +46,7 @@ do
     ID="${name%.trimmed.fastq.gz}"
     PL=DNBSEQ
 
+#might be a good idea to not pipe bwa map & samtools view in case you want to assess mapping percentages across samples (by piping you only keep bam files with 100% mapping rate, due to sam filters) 
     # Align reads
     bwa mem  -M -t "$NCPU" -R "@RG\tID:$ID\tSM:$ID\tPL:$PL" "$GENOMEFOLDER"/"$GENOME" "$RAWDATAFOLDER"/"$name" "$RAWDATAFOLDER"/"$name2" |
     samtools view -Sb -q 20 -f 2 -F 8 -F 4 - > "$ALIGNEDFOLDER"/"${name%.fastq.gz}".bam
