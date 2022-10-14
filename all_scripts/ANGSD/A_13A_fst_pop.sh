@@ -69,7 +69,7 @@ do
 		echo "calcualte the 2dsfs priors"
 realSFS  angsd/07_fst_by_pop_pair/$GROUP/"$pop1"_saf.saf.idx \
 angsd/07_fst_by_pop_pair/$GROUP/"$pop2"_saf.saf.idx \
--P $NB_CPU -maxIter 30 -nSites $NSITES > angsd/07_fst_by_pop_pair/$GROUP/"$pop1"_"$pop2"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"."$NSITES"
+-P $NB_CPU -maxIter 30 -nSites $NSITES -fold 1 > angsd/07_fst_by_pop_pair/$GROUP/"$pop1"_"$pop2"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"."$NSITES"
 		
 
 	done
