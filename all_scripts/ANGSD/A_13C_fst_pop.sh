@@ -44,7 +44,7 @@ do
 		realSFS fst index angsd/07_fst_by_pop_pair/$GROUP/"$pop1"_saf.saf.idx \
 angsd/07_fst_by_pop_pair/$GROUP/"$pop2"_saf.saf.idx \
 -sfs angsd/07_fst_by_pop_pair/$GROUP/"$pop1"_"$pop2"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"."$NSITES".2dsfs \
--P $NB_CPU -fstout angsd/07_fst_by_pop_pair/$GROUP/"$pop1"_"$pop2"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"_nMAF
+-P $NB_CPU -fold 1 -fstout angsd/07_fst_by_pop_pair/$GROUP/"$pop1"_"$pop2"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"_nMAF
 
 		echo "print SFS priori for each position"
 		realSFS fst print angsd/07_fst_by_pop_pair/$GROUP/"$pop1"_"$pop2"_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"_nMAF.fst.idx \
