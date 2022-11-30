@@ -16,3 +16,5 @@ cd /ocean/projects/deb200006p/enielsen/LGwork
 source A_01_config.sh
 
 Rscript 10_Rfiles/OutFLANKpairwise_ENmod.R angsd/06_saf_maf_by_pop/BMR/BMR_maf0.05_pctind0.5_maxdepth152.mafs angsd/06_saf_maf_by_pop/C/C_maf0.05_pctind0.5_maxdepth152.mafs angsd/06_saf_maf_by_pop/KR/KR_maf0.05_pctind0.5_maxdepth152.mafs angsd/06_saf_maf_by_pop/SP/SP_maf0.05_pctind0.5_maxdepth152.mafs BMR_C_KR_SP_OutFLANKin.152.txt
+
+
