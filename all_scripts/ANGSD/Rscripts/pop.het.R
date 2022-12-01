@@ -4,7 +4,7 @@
 
 setwd("~//ocean/projects/deb200006p/enielsen/LGwork/angsd/03_saf_maf_gl_all")
 
-glf <- read.table(file = 'ALL_CA_maf0.05_pctind0.5_maxdepth15.beagle.gz', header=TRUE)[,-c(1:3)]
+glf <- read.table(file = 'ALL_2_maf0.05_pctind0.5_maxdepth15.beagle.gz', header=TRUE)[,-c(1:3)]
 glf <- array(c(t(as.matrix(glf))), c(3, ncol(glf)/3, nrow(glf)))
 EMstep <- function (sfs, GL) rowMeans(prop.table(sfs * GL, 2))
 
