@@ -13,6 +13,7 @@ set -x
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
 
+#index sites for either missense or synonymous
 angsd sites index gen_load/ensembl-vep/syn.vep.sites
 angsd sites index gen_load/ensembl-vep/miss.vep.sites
 
@@ -29,6 +30,7 @@ TODO="-doSaf 1 -anc $GENOME_REF -ref $GENOME_REF"
 #CR 30
 #SB 29
 
+#Run angsd only on sites of either miss or syn
 # too lazy to do for looop
 angsd -sites gen_load/ensembl-vep/syn.vep.sites -b 02_info/KRbam.filelist -GL 1 -P 1 -minInd 15 $TODO -out gen_load/ensembl-vep/KR.nomaf.synon 
 angsd -sites gen_load/ensembl-vep/syn.vep.sites -b 02_info/FRbam.filelist -GL 1 -P 1 -minInd 15 $TODO -out gen_load/ensembl-vep/FR.nomaf.synon
