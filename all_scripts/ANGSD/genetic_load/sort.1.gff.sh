@@ -1,14 +1,14 @@
 #!/bin/bash
 #SBATCH --mail-user=esnielsen@ucdavis.edu
 #SBATCH --mail-type=ALL
-#SBATCH -J sort_gff
+#SBATCH -J sort1_gff
 #SBATCH -p RM-shared
 #SBATCH --cpus-per-task=1
 #SBATCH -t 4:00:00
 set -e
 set -x
 # To Run
-# sbatch sort.gff.sh
+# sbatch sort.1.gff.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork/gen_load/ensembl-vep
