@@ -20,6 +20,7 @@ eval "$(conda shell.bash hook)"
 conda activate plink
 
 #take .tped file from angsd maf_saf script and convert genotypes to represented by 0, 1, 2 (by --recode A)
+#here there is a .tped file for just the leading region, but this was done on all samples
 
 plink --tped angsd/03_saf_maf_gl_all/regions/leading_2_maf0.05_pctind0.5_maxdepth15.tped \
 --tfam angsd/03_saf_maf_gl_all/regions/leading_2_maf0.05_pctind0.5_maxdepth15.tfam --allow-extra-chr --recode A \
