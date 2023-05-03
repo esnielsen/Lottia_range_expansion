@@ -10,18 +10,19 @@ set -x
 # To Run
 # sbatch A_14B_thetas_R.sh
 
+#theta 14A script gives a file with several lines while the expected sfs has just one line. So we use the R script to sum accross all columns
+#this R script will output a file whose name is the same but without the suffix "NSITES" (500000 in our defaut settings)
+  
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
-
 
 #prepare variables - avoid to modify
 source A_01.A_config.sh
 
 #maybe edit
 NB_CPU=1 #change accordingly in SLURM header
-NSITES=500000 #to make realSFS goes faster -reduce the number of sites considered (DO I NEED??)
-GROUP=pop #the subgroup on whcih we are making the fst comparison -> it should be a file like GROUP.txt in the folder 02_info
-POP_FILE1=02_info/"$GROUP".txt #choose on which list of pop run the analyses
+NSITES=500000 #to make realSFS goes faster -reduce the number of sites considered 
+POP_FILE1=02_info/pop.txt #choose on which list of pop run the analyses
 
 cat $POP_FILE1 | while read i
 do
