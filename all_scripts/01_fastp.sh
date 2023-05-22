@@ -2,10 +2,12 @@
 #!/bin/bash
 #SBATCH --mail-user=esnielsen@ucdavis.edu
 #SBATCH --mail-type=ALL
-#SBATCH -J fast-p
-#SBATCH -p RM-shared
-#SBATCH -t 20:00:00
-#SBATCH --ntasks-per-node=6
+#SBATCH -J fast-p #name of job
+#SBATCH -p RM-shared # assign to Bridges2 RM-shared partition
+#SBATCH -t 20:00:00 # time in hours, min, sec
+#SBATCH -N 1  # assign 1 node
+#SBATCH --ntasks-per-node=6 # assign 6 tasks per node
+#SBATCH --mem=60000 # memory (30,000 mb = 30gb)
 set -e
 set -x
 # To Run
@@ -19,7 +21,7 @@ module load anaconda3
 eval "$(conda shell.bash hook)"
 conda activate fastp.filter
 
-# Iterate over files in data folder
+# Iterate over files in data folder, and run fastp for each
 for file in $(ls -1 rawdata/fastqs/*_*_1*.gz)
 do
     input_file=$(echo "$file" | perl -pe 's/_1.fq.gz//')
