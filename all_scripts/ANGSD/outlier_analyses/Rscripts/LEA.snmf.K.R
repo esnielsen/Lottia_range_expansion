@@ -4,7 +4,7 @@
 library(LEA)
 library(ggplot2)
 
-#input gen data
+#input gen data -- this is from the extract_format_maf_pruned.r script
 gen.input <- read.lfmm("by_pop_0.05_pctind0.5.lfmm")
 
 #Trying K clusters 1-10, and running 10 iterations per K
