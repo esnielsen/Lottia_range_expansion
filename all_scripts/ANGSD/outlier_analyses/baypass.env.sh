@@ -15,6 +15,10 @@ cd /ocean/projects/deb200006p/enielsen/LGwork/Outliers/03_baypass
 
 NB_CPU=5
 
+#npop = 19 populations
+#omega file is from baypass1.sh 
+#efile= environmental file, columns = sample sites, rows = env variables
+#scalecov = scale/transform the env variables 
 
 baypass_2.31/sources/g_baypass -npop 19 \
  -gfile by_pop_0.05_pctind0.5_maxdepth15.mafs.pruned.baypass \
