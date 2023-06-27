@@ -13,5 +13,9 @@ set -x
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork/Outliers/03_baypass
 
+# npop= number of populations
+# gfile is the simulated genomic data from the baypass R script (bpass.sim.pod.R)
 
 baypass_2.31/sources/g_baypass -npop 19 -gfile G.ALL2_sim_pod -outprefix ALL_2_r2.sim -npilot 100 -nthreads 5
+
+# take the omega.out, xtx.out output files and use it as input in bpass.sim.pod.R
