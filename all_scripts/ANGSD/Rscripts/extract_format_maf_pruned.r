@@ -1,4 +1,6 @@
-#this R script extract per pop maf in a single file for all populations
+# this R script extracts per pop maf in a single file for all populations
+# take the outputs from running ANGSD on each pop individually and convert the .maf output into mafs for all pops as inputs for LFMM, RDA, BayPass
+
 library(dplyr)
 setwd("/ocean/projects/deb200006p/enielsen/LGwork/")
 
@@ -9,11 +11,11 @@ PERCENT_IND <- argv[2]
 ANGSD_PATH<- argv[3]
 MAX_DEPTH_FACTOR<-argv[4]
 
-#read sites files Ld-pruned and filter out for missassemblies & inversions
+#read sites files for LD-pruned and filtered SNPs
 sites<-read.table("02_info/sites_ALL_2_maf0.05_pctind0.5_maxdepth15_R2.pruned", header=F)
 colnames(sites)<-c("chromo", "position", "major", "minor")
 
-#read pop file
+#read pop file (list of population names)
 pop<-read.table("02_info/pop.txt", header=F)
 npop<-dim(pop)[1]
 pop_group<-"pop" #unlist(strsplit(unlist(strsplit(POP,"/"))[2],".txt"))
