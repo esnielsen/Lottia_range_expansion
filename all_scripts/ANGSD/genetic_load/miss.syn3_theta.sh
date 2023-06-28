@@ -18,23 +18,30 @@ cd /ocean/projects/deb200006p/enielsen/LGwork
 GENOME_REF=03_genome/Lottia_gigantea.Lotgi1.dna.toplevel.fa
 TODO="-doSaf 1 -doThetas 1 -anc $GENOME_REF -ref $GENOME_REF"
 
-angsd -sites gen_load/ensembl-vep/syn.vep.sites -b 02_info/KRbam.filelist -GL 1 -P 4 $TODO -pest gen_load/ensembl-vep/KR.nomaf.synon.sfs -out gen_load/ensembl-vep/KR.nomaf.synon 
-angsd -sites gen_load/ensembl-vep/syn.vep.sites -b 02_info/FRbam.filelist -GL 1 -P 4 $TODO -pest gen_load/ensembl-vep/FR.nomaf.synon.sfs -out gen_load/ensembl-vep/FR.nomaf.synon 
-angsd -sites gen_load/ensembl-vep/syn.vep.sites -b 02_info/BBbam.filelist -GL 1 -P 4 $TODO -pest gen_load/ensembl-vep/BB.nomaf.synon.sfs -out gen_load/ensembl-vep/BB.nomaf.synon
-angsd -sites gen_load/ensembl-vep/syn.vep.sites -b 02_info/DBbam.filelist -GL 1 -P 4 $TODO -pest gen_load/ensembl-vep/DB.nomaf.synon.sfs -out gen_load/ensembl-vep/DB.nomaf.synon
-angsd -sites gen_load/ensembl-vep/syn.vep.sites -b 02_info/HPbam.filelist -GL 1 -P 4 $TODO -pest gen_load/ensembl-vep/HP.nomaf.synon.sfs -out gen_load/ensembl-vep/HP.nomaf.synon
-angsd -sites gen_load/ensembl-vep/syn.vep.sites -b 02_info/CRbam.filelist -GL 1 -P 4 $TODO -pest gen_load/ensembl-vep/CR.nomaf.synon.sfs -out gen_load/ensembl-vep/CR.nomaf.synon
-angsd -sites gen_load/ensembl-vep/syn.vep.sites -b 02_info/SBbam.filelist -GL 1 -P 4 $TODO -pest gen_load/ensembl-vep/SB.nomaf.synon.sfs -out gen_load/ensembl-vep/SB.nomaf.synon
+POP_FILE1=02_info/pop2.txt #change with pops
 
+#prepare variables - avoid to modify
+num_pops=$(wc -l "$POP_FILE1" | cut -d " " -f 1)
 
-angsd -sites gen_load/ensembl-vep/miss.vep.sites -b 02_info/KRbam.filelist -GL 1 -P 4 $TODO -pest gen_load/ensembl-vep/KR.nomaf.mis.sfs -out gen_load/ensembl-vep/KR.nomaf.mis
-angsd -sites gen_load/ensembl-vep/miss.vep.sites -b 02_info/FRbam.filelist -GL 1 -P 4 $TODO -pest gen_load/ensembl-vep/FR.nomaf.mis.sfs -out gen_load/ensembl-vep/FR.nomaf.mis
-angsd -sites gen_load/ensembl-vep/miss.vep.sites -b 02_info/BBbam.filelist -GL 1 -P 4 $TODO -pest gen_load/ensembl-vep/BB.nomaf.mis.sfs -out gen_load/ensembl-vep/BB.nomaf.mis
-angsd -sites gen_load/ensembl-vep/miss.vep.sites -b 02_info/DBbam.filelist -GL 1 -P 4 $TODO -pest gen_load/ensembl-vep/DB.nomaf.mis.sfs -out gen_load/ensembl-vep/DB.nomaf.mis
-angsd -sites gen_load/ensembl-vep/miss.vep.sites -b 02_info/HPbam.filelist -GL 1 -P 4 $TODO -pest gen_load/ensembl-vep/HP.nomaf.mis.sfs -out gen_load/ensembl-vep/HP.nomaf.mis
-angsd -sites gen_load/ensembl-vep/miss.vep.sites -b 02_info/CRbam.filelist -GL 1 -P 4 $TODO -pest gen_load/ensembl-vep/CR.nomaf.mis.sfs -out gen_load/ensembl-vep/CR.nomaf.mis
-angsd -sites gen_load/ensembl-vep/miss.vep.sites -b 02_info/SBbam.filelist -GL 1 -P 4 $TODO -pest gen_load/ensembl-vep/SB.nomaf.mis.sfs -out gen_load/ensembl-vep/SB.nomaf.mis
+# Do saf/maf for all population listed
+cat $POP_FILE1 | while read i
+do
+echo $i
 
+angsd -sites gen_load/ensembl-vep/syn.vep.sites -b 02_info/"$i"bam.filelist -GL 1 -P 30 $TODO -pest gen_load/ensembl-vep/"$i".nomaf.synon.sfs -out gen_load/ensembl-vep/"$i".nomaf.synon
+angsd -sites gen_load/ensembl-vep/miss.vep.sites -b 02_info/"$i"bam.filelist -GL 1 -P 30 $TODO -pest gen_load/ensembl-vep/"$i".nomaf.mis.sfs -out gen_load/ensembl-vep/"$i".nomaf.miss
 
+done
+
+#we now run the thetaStat calcs in ANGSD for each pop
+for i in gen_load/ensembl-vep/*thetas.idx; do thetaStat do_stat $i; done
+for i in gen_load/ensembl-vep/*thetas.idx; do thetaStat print $i > $i.logscaled; done
+for i in gen_load/ensembl-vep/*logscaled; do awk '{print exp($4*log(10));}' $i | tail -n +2 > ${i/%.logscaled/}.raw; done
+
+#this will then give the average theta per pop as output
+for i in gen_load/ensembl-vep/*.raw; do awk '{ total += $1 } END { print total/NR }' $i; echo $i;  done
+
+###
+## NOT USED:
 #Do a sliding window analysis to get theta values per pop, and then follow steps as before where we divide tW column by nsites column, then average those values per pop
 for i in gen_load/ensembl-vep/*thetas.idx; do thetaStat do_stat $i -win $WINDOW -step $WINDOW_STEP -outnames ${i/%.thetas.idx/}.thetaswindow;  done
