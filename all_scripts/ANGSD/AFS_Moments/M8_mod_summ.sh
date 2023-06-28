@@ -8,9 +8,13 @@
 set -e
 set -x
 # To Run
-# sbatch M_mod_summ.sh
-
+# sbatch M8_mod_summ.sh
 
 cd /ocean/projects/deb200006p/enielsen/LGwork/Moments
 
-Rscript AFS-analysis-with-moments/work/modSel_summary.R modselResult=AFS-analysis-with-moments/p12.modsel args="p1 p2 13 16 0.018 0.002"
+#this will look at all the models you just ran and find the best ones!
+Rscript AFS-analysis-with-moments/work/modSel_summary.R modselResult=p2.CA.Mex/CA.s.Mex.modsel args="CA.s Mex 48 48 0.0018 0.002" folded=TRUE
+
+#this gives two output pdfs:
+# pN.NC_modsel_allBoxplots.pdf - this is BIGGGG plot showing rankings of all models
+# pN.NC_modsel_top10medians.pdf - this is plot showing ranking of only top 10 models
