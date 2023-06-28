@@ -8,7 +8,7 @@
 set -e
 set -x
 # To Run
-# sbatch M_create_sfs1.sh
+# sbatch M1_create_sfs1.sh
 
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
