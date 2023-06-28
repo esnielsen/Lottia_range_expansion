@@ -13,8 +13,8 @@ set -x
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork
 
-
+#bootstrap 100 times to account for variation in SFSs (here shown just for CA.s Mex comparison)
 >b100
 for B in `seq 1 100`; do
-echo "sleep $B && realSFS BMR.saf.idx C.saf.idx -ref 03_genome/Lottia_gigantea.Lotgi1.dna.toplevel.fa -anc 03_genome/Lottia_gigantea.Lotgi1.dna.toplevel.fa -bootstrap 5 -P 1 -resample_chr 1 >p12_$B">>b100;
+echo "sleep $B && realSFS p2.CA.s.saf.idx p2.Mex.saf.idx -ref 03_genome/Lottia_gigantea.Lotgi1.dna.toplevel.fa -anc 03_genome/Lottia_gigantea.Lotgi1.dna.toplevel.fa -bootstrap 5 -P 10 -resample_chr 1 > p2.CA.Mex/CA.s.Mex_$B">>b100;
 done
