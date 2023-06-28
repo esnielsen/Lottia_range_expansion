@@ -13,7 +13,7 @@ set -x
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork/gen_load/ensembl-vep
 
-#filter vep output to make sites list for angsd
+#filter vep output to make missense sites list for angsd
 grep -w 'missense_variant' variant_effect_output.txt > miss.vep.out.txt
 
 cat miss.vep.out.txt | awk '{ print $1 }' > miss.vep.col.txt
