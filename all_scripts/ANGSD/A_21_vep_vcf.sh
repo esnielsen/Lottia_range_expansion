@@ -31,4 +31,4 @@ angsd -P $NB_CPU -nQueueSize 50 \
 -anc 03_genome/Lottia_gigantea.Lotgi1.dna.toplevel.fa \
 -minMapQ 30 -minQ 20 -minInd 165 -setMaxDepth 3100 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -skipTriallelic 1 \
 -b 02_info/vep.bams.filelist \
--out angsd/03_saf_maf_gl_all/regions/vep_lead_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"_pruned.R2
+-out angsd/03_saf_maf_gl_all/regions/vep_maf"$MIN_MAF"_pctind"$PERCENT_IND"_maxdepth"$MAX_DEPTH_FACTOR"
