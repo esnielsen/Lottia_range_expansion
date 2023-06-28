@@ -12,7 +12,8 @@ set -x
 
 cd /ocean/projects/deb200006p/enielsen/LGwork/Moments
 
-#this will look at all the models you just ran and find the best ones!
+#this will look at all the models you just ran and find the best ones! (keep same parameters as before)
+
 Rscript AFS-analysis-with-moments/work/modSel_summary.R modselResult=p2.CA.Mex/CA.s.Mex.modsel args="CA.s Mex 48 48 0.0018 0.002" folded=TRUE
 
 #this gives two output pdfs:
