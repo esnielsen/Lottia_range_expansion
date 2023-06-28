@@ -14,8 +14,8 @@ set -x
 #Set up directory
 cd /ocean/projects/deb200006p/enielsen/LGwork/Moment
 
-# the following script will create the script to actually run all the Moments models
-#in the following parameters, you can indicate lower number of samples per population as downsampling
+# the following script will create the script to actually run all the Moments models (i.e. the "modelsel.runs" output)
+# in the following parameters, you can indicate lower number of samples per population as downsampling
 
 Rscript AFS-analysis-with-moments/work/modSel_write.R contrast=CA.s.Mex args="CA.s Mex 48 48 0.0018 0.002" folded=TRUE
 
