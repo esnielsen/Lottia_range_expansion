@@ -8,11 +8,15 @@
 set -e
 set -x
 # To Run
-# sbatch M_modselR.sh
+# To Run
+# sbatch M6_modselR.sh
 
 #Set up directory
-cd /ocean/projects/deb200006p/enielsen/LGwork/Moments
+cd /ocean/projects/deb200006p/enielsen/LGwork/Moment
 
-#in the following parameters, I can indicate lower number of samples per population as downsampling
+# the following script will create the script to actually run all the Moments models
+#in the following parameters, you can indicate lower number of samples per population as downsampling
 
-Rscript AFS-analysis-with-moments/work/modSel_write.R contrast=p12 args="p1 p2 13 16 0.018 0.002"
+Rscript AFS-analysis-with-moments/work/modSel_write.R contrast=CA.s.Mex args="CA.s Mex 48 48 0.0018 0.002" folded=TRUE
+
+#args = pop1 name/ pop2 name/ pop projections (1.6N for each population rounded to integer)/ mutation rate (per genotyped portion of the genome per generation)/ generation time in thousands of years
