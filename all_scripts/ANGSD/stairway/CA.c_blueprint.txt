@@ -1,0 +1,25 @@
+#stairway blueprint file
+#input setting
+popid: CA.c # id of the population (no white space)
+nseq: 538 # number of sequences
+L: 1711940 # total number of observed nucleic sites, including polymorphic and monomorphic
+whether_folded: true # whethr the SFS is folded (true or false)
+SFS: 2	0	17	37	0	0	0	0	157	0	0	0	0	0	883	0	0	0	70	5	2018	0	5	359	9851	0	92	14130	0	20	31	50241	0	1889	269	0	1848	41404	0	847	525	5	26257	2	4	2439	918	0	6982	0	34603	0	275	8	1691	12803	0	22	0	0	16441	0	2019	6	0	0	2	21474	1507	111	0	6474	0	8544	0	927	0	5375	1318	0	8080	5	287	3095	183	454	2	359	365	14833	15	0	378	8339	0	0	0	5035	0	2858	0	146	0	0	9531	1384	108	1042	0	0	94	9827	0	0	46	0	1	0	2631	0	2801	0	0	8142	5	0	3	819	0	1475	2241	0	1366	0	0	3361	0	0	0	0	0	7169	2223	0	0	529	0	58	0	0	1	7374	0	1623	1	0	1642	1	0	0	0	1	0	666	4704	0	0	1891	0	5647	0	1	0	0	4	310	0	3875	0	1774	0	18	0	3	0	18	0	4166	0	0	971	0	3418	0	3	0	0	3606	2	0	15	4	0	3201	0	0	2130	1256	0	217	0	0	0	6	0	4999	0	1171	1516	158	0	0	61	152	3668	0	0	3	209	0	1671	3462	0	3648	822	0	0	15	0	2648	0	4	2146	17	0	0	4322	0	1	0	4673	31	0	0	4559	404	2	91	0	7062	0	31	314	0	0	190	3107	8	0 # snp frequency spectrum: number of singleton, number of doubleton, etc. (separated by white space)
+#smallest_size_of_SFS_bin_used_for_estimation: 1 # default is 1; to ignore singletons, uncomment this line and change this number to 2
+#largest_size_of_SFS_bin_used_for_estimation: 30 # default is nseq/2 for folded SFS
+pct_training: 0.67 # percentage of sites for training
+nrand: 134	268	402	536 # number of random break points for each try (separated by white space)
+project_dir: CA.c # project directory
+stairway_plot_dir: /ocean/projects/deb200006p/enielsen/LGwork/stairway/stairway_plot_v2.1.1/stairway_plot_es # directory to the stairway plot files
+ninput: 200 # number of input files to be created for each estimation
+#random_seed: 6
+#output setting
+mu: 3.2e-9 # assumed mutation rate per site per generation #because gen time=2yrs, its (1.6 × 10–9)*2
+year_per_generation: 2 # assumed generation time (in years)
+#plot setting
+plot_title: CA.c_fold # title of the plot
+xrange: 0.1,100 # Time (1k year) range; format: xmin,xmax; "0,0" for default
+yrange: 0,0 # Ne (1k individual) range; format: xmin,xmax; "0,0" for default
+xspacing: 2 # X axis spacing
+yspacing: 2 # Y axis spacing
+fontsize: 12 # Font size

@@ -1,0 +1,25 @@
+#stairway blueprint file
+#input setting
+popid: CA.n # id of the population (no white space)
+nseq: 240 # number of sequences
+L: 1711940 # total number of observed nucleic sites, including polymorphic and monomorphic
+whether_folded: true # whethr the SFS is folded (true or false)
+SFS: 20	71	145	53	286	314	1068	185	5288	786	7871	15289	6241	1826	32020	1012	30352	0	28080	0	38860	2	1245	26324	1236	11537	979	17839	151	3456	2144	24384	0	2423	2765	1372	15456	0	0	16882	429	38	0	18117	2069	2453	0	523	13614	201	494	1076	0	1247	13336	1319	896	35	1670	3477	759	0	8548	0	0	6615	63	0	4270	551	0	6067	2668	0	0	732	0	9047	0	841	0	5665	0	0	1877	3574	0	4206	82	0	531	996	5688	0	0	3553	2333	1	1248	389	459	8663	0	0	0	6255	3316	0	274	0	0	8252	8524	0	0	2274	4713	1	4142	3697 # snp frequency spectrum: number of singleton, number of doubleton, etc. (separated by white space)
+#smallest_size_of_SFS_bin_used_for_estimation: 1 # default is 1; to ignore singletons, uncomment this line and change this number to 2
+#largest_size_of_SFS_bin_used_for_estimation: 30 # default is nseq/2 for folded SFS
+pct_training: 0.67 # percentage of sites for training
+nrand: 60	119	179	238 # number of random break points for each try (separated by white space)
+project_dir: CA.n # project directory
+stairway_plot_dir: /ocean/projects/deb200006p/enielsen/LGwork/stairway/stairway_plot_v2.1.1/stairway_plot_es # directory to the stairway plot files
+ninput: 200 # number of input files to be created for each estimation
+#random_seed: 6
+#output setting
+mu: 3.2e-9 # assumed mutation rate per site per generation #because gen time=2yrs, its (1.6 × 10–9)*2
+year_per_generation: 2 # assumed generation time (in years)
+#plot setting
+plot_title: CA.n_fold # title of the plot
+xrange: 0.1,100 # Time (1k year) range; format: xmin,xmax; "0,0" for default
+yrange: 0,0 # Ne (1k individual) range; format: xmin,xmax; "0,0" for default
+xspacing: 2 # X axis spacing
+yspacing: 2 # Y axis spacing
+fontsize: 12 # Font size
