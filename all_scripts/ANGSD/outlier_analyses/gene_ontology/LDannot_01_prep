@@ -1,1 +1,16 @@
+# Our input files for LDannot will be the non-LD filtered vcf file (from angsd) and the .gff genome file 
+# But with the OG file I got error "Chromosome column contains other names than a number or X or Y" so need to edit the vcf to not have our weird contig names
 
+### So in terminal do the following:
+# first check the .gff header
+  head Lottia_gigantea.55.gff
+# then remove chr
+sed 's/LOTGIsca_//' Lottia_gigantea.55.gff > Lottia_gigantea.55.edit.gff
+head Lottia_gigantea.55.edit.gff
+
+#do same for vcf
+head -20  ALL_2_maf0.05_pctind0.5_maxdepth15_pruned.vcf
+sed 's/LOTGIsca_//' ALL_2_maf0.05_pctind0.5_maxdepth15_pruned.vcf > ALL_2_no_chr.vcf
+head -20 ALL_2_no_chr.vcf
+
+# so now we just have numbers instead of chr_num -- make sure to edit the chroms out of the outlier snp list as well!
