@@ -14,4 +14,4 @@ set -x
 cd /ocean/projects/deb200006p/enielsen/LGwork/grrf
 
 #bash script to run R script
-Rscript GRRF2.R
+Rscript GRRF.R
