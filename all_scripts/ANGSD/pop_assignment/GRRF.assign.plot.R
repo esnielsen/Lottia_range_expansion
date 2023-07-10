@@ -178,6 +178,9 @@ imputed<-rfImpute(CA.n.L.grrf.m, ID, iter=10, ntree=5000)
 #change to df so you get around error: Input data sets are not the same type. Enter '?assign.X' to see description of x1 and x2 arguments
 imputed.df<-as.data.frame(imputed)
 
+
+#NB: x2 should have first column be sampID (so should be num snp col +1)
+#NB: x1 should have num snp col +2, with first col being sampID and final col being popID
 ## Run assigments using the 3 options available
 assign.X( x1=geno.in, x2=imputed.df, dir="GGRF1_2pop_30SNPS-assign_RF/", model="randomForest", pca.method=TRUE)
 
@@ -347,8 +350,103 @@ imputed<-rfImpute(CA.n.L.grrf.m, ID, iter=10, ntree=5000)
 #change to df so you get around error: Input data sets are not the same type. Enter '?assign.X' to see description of x1 and x2 arguments
 imputed.df<-as.data.frame(imputed)
 
-#NB: x2 should have first column be sampID (so should be num snp col +1)
-#NB: x1 should have num snp col +2, with first col being sampID and final col being popID
-
 #assign individs
 assign.X( x1=geno.in, x2=imputed.df, dir="GGRF1_3pop_30SNPS-assign_R/", model="randomForest", pca.method=TRUE)
+
+
+##################################
+### Plotting assignment as barplots
+library(ggplot2)
+library(forcats)
+library(ggthemes)
+library(patchwork)
+library(tidyr)
+
+coarse_RF <- read_excel("coarse_RF.xlsx", 
+                        +     col_types = c("numeric", "text", "numeric", 
+                                            +         "numeric", "numeric"))
+
+grrf_df<-pivot_longer(data= coarse_RF,
+                      cols = c("1":"2"),
+                      values_to = "Values",
+                      names_to = "assign")
+
+#plot with 2 colors
+ggplot(grrf_df, aes(factor(samp_id), Values, fill = factor(assign))) +
+  geom_col(color = "gray", linewidth = 0.1) +
+  facet_grid(~fct_inorder(pop), switch = "x", scales = "free", space = "free") +
+  theme_minimal() + labs(x = "Individuals", title = "170 loci-RF", y = "% assigned") +
+  scale_y_continuous(expand = c(0, 0)) +
+  scale_x_discrete(expand = expansion(add = 1)) +
+  theme(
+    panel.spacing.x = unit(0.1, "lines"),
+    axis.text.x = element_blank(),
+    panel.grid = element_blank()
+  ) + scale_fill_manual(values=c("#36648B",
+                                 "#FFA500"))
+
+
+# 3 pop
+grrf_df<-pivot_longer(data= X3pop_RF,
+                      cols = c("1":"3"),
+                      values_to = "Values",
+                      names_to = "assign")
+
+ggplot(grrf_df, aes(factor(Ind.ID), Values, fill = factor(assign))) +
+  geom_col(color = "gray", linewidth = 0.1) +
+  facet_grid(~fct_inorder(pop), switch = "x", scales = "free", space = "free") +
+  theme_minimal() + labs(x = "Individuals", title = "180 loci-RF", y = "% assigned") +
+  scale_y_continuous(expand = c(0, 0)) +
+  scale_x_discrete(expand = expansion(add = 1)) +
+  theme(
+    panel.spacing.x = unit(0.1, "lines"),
+    axis.text.x = element_blank(),
+    panel.grid = element_blank()
+  ) + scale_fill_manual(values=c("#36648B", "yellow2", "darkorange"))
+
+
+
+## Run stats to see if pops differ in their assignments
+
+#read assignments
+coarse_RF <- read_excel("coarse_RF.xlsx", 
+                        col_types = c("numeric", "text", "numeric", 
+                                      "numeric", "numeric"))
+
+
+#run anova
+one.way <- aov(North ~ pop, data = coarse_RF)
+
+summary(one.way)
+
+#pop is not sign diff
+Df Sum Sq Mean Sq F value Pr(>F)  
+pop          3  1.140  0.3800    2.34 0.0836 .
+Residuals   54  8.769  0.1624                 
+---
+  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+# plot boxplot w/signif
+library(ggplot2)
+library(ggsignif)
+library(ggpubr)
+
+#do pairwise comparison tests
+my_comparisons <- list( c("KR", "FR"), c("KR", "BB"), c("KR", "DB"), c("FR", "BB"), c("FR", "DB"), c("BB", "DB") )
+ggboxplot(coarse_RF, x = "pop", y = "North",
+          color = "pop", palette = "jco")+ 
+  stat_compare_means(comparisons = my_comparisons) # Add pairwise comparisons p-value
+
+###basically there is no signficant difference in assignments between pops
+
+#compare each pop to the mean of all combined
+compare_means(North ~ pop,  data = coarse_RF, ref.group = ".all.",
+              method = "t.test")
+
+# Visualize
+ggboxplot(coarse_RF, x = "pop", y = "North",
+          color = "pop", palette = "jco")+
+  stat_compare_means(method = "anova")+      # Add global p-value
+  stat_compare_means(label = "p.signif", method = "t.test",
+                     ref.group = ".all.") 
+
