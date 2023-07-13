@@ -60,6 +60,8 @@ for (i in n) {
 
 ###### then read all of the outputs per MC or K assign tests and combine into single table
 
+### NB!! : R will read 100 before 90, which we dont want, so if there's > 100 snps in GRRF list, then I editted the ouput names manually to make sure they are in sequential order
+
 ## For MC outputs:
 #list all outputs per run
 dirs <- list.dirs()
