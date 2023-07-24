@@ -14,4 +14,9 @@ set -x
 cd /ocean/projects/deb200006p/enielsen/LGwork/grrf
 
 #bash script to run R script
+# GRRF.R = analyses where we assign CA.n large individs to CA.c or CA.s source pops (based on large individs)
+# GRRF2.R = where we assign CA.n small individs to CA.n, CA.c, CA.s (based on large individs) 
+
 Rscript GRRF.R
+
+
