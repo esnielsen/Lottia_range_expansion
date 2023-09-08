@@ -1,0 +1,181 @@
+---
+title: "GAMs.23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "~/Desktop/Erica/GAMs")
+```
+
+## First we load neccessary packages
+
+```{r load data}
+library(gratia)
+library(gamm4)
+library(mgcv)
+library(MASS)
+library(stringr)
+library(tidyr)
+library(ggplot2)
+library(ggthemes)
+library(viridis)
+library(readxl)
+```
+
+
+# Run models which compare protected and non-protected sites
+
+```{r run prot GAM NEW, echo=FALSE}
+sc_bin_fac_models <- read_excel("sc.bin.fac.mod.filter.xlsx") #read input file (has counts per size bin per site)
+sc_bin_fac_models$protection <- as.factor(sc_bin_fac_models$protection) #set protection as factor
+sc_bin_fac_models$size_bin <- as.factor(sc_bin_fac_models$size_bin) #set size bin as factor
+
+### Below I compare some different parameters, such as the wiggliness (k), type of spline (tp=thin plate, cr=cubic regression), family (tw=tweedie, nb=negative binomial)
+fac.model.cr.tw.k20 <- bam(count ~ interaction(size_bin, protection) + s(year, bs = "cr",k = 20) + s(year, by = size_bin, bs = "cr", k = 20) + s(year, by = protection, bs = "cr", k = 20) + s(year, by = interaction(size_bin, protection), bs = "cr", k = 20) + offset(log(plots_sampled)), data=sc_bin_fac_models, family=tw, method="REML")
+
+anova(fac.model.cr.tw.k20)
+summary(fac.model.cr.tw.k20)
+appraise(fac.model.cr.tw.k20)
+
+
+fac.model.cr.tw.k10 <- bam(count ~ interaction(size_bin, protection) + s(year, bs = "cr",k = 10) + s(year, by = size_bin, bs = "cr", k = 10) + s(year, by = protection, bs = "cr", k = 10) + s(year, by = interaction(size_bin, protection), bs = "cr", k = 10) + offset(log(plots_sampled)), data=sc_bin_fac_models, family=tw, method="REML")
+
+anova(fac.model.cr.tw.k10)
+summary(fac.model.cr.tw.k10)
+appraise(fac.model.cr.tw.k10)
+
+
+fac.model.tp.tw.k10 <- bam(count ~ interaction(size_bin, protection) + s(year, bs = "tp",k = 10) + s(year, by = size_bin, bs = "tp", k = 10) + s(year, by = protection, bs = "tp", k = 10) + s(year, by = interaction(size_bin, protection), bs = "tp", k = 10) + offset(log(plots_sampled)), data=sc_bin_fac_models, family=tw, method="REML")
+
+anova(fac.model.tp.tw.k10)
+summary(fac.model.tp.tw.k10)
+appraise(fac.model.tp.tw.k10)
+
+fac.model.tp.tw.k20 <- bam(count ~ interaction(size_bin, protection) + s(year, bs = "tp",k = 20) + s(year, by = size_bin, bs = "tp", k = 20) + s(year, by = protection, bs = "tp", k = 20) + s(year, by = interaction(size_bin, protection), bs = "tp", k = 20) + offset(log(plots_sampled)), data=sc_bin_fac_models, family=tw, method="REML")
+
+anova(fac.model.tp.tw.k20)
+summary(fac.model.tp.tw.k20)
+appraise(fac.model.tp.tw.k20)
+
+fac.model.cr.nb.k20 <- bam(count ~ interaction(size_bin, protection) + s(year, bs = "cr",k = 20) + s(year, by = size_bin, bs = "cr", k = 20) + s(year, by = protection, bs = "cr", k = 20) + s(year, by = interaction(size_bin, protection), bs = "cr", k = 20) + offset(log(plots_sampled)), data=sc_bin_fac_models, family=nb(link="log"), method="REML")
+
+anova(fac.model.cr.nb.k20)
+summary(fac.model.cr.nb.k20)
+appraise(fac.model.cr.nb.k20)
+
+##compare outputs with RMSE
+fac.mod1 <-sqrt(mean(residuals(fac.model.cr.tw.k20)^2)) #0.9848034
+fac.mod2 <-sqrt(mean(residuals(fac.model.cr.tw.k10)^2)) #0.9882544
+fac.mod3 <-sqrt(mean(residuals(fac.model.tp.tw.k10)^2)) #0.9877893
+fac.mod4 <-sqrt(mean(residuals(fac.model.tp.tw.k20)^2)) #0.9847611
+fac.mod5 <-sqrt(mean(residuals(fac.model.cr.nb.k20)^2)) #1.059042
+
+## outputs with REML
+fac.mod1 = 4207.6
+fac.mod2 = 4222.6
+fac.mod3 = 4233.1
+fac.mod4 = 4220.9
+fac.mod5 = 4454.6
+
+
+### using the first model because it has lowest REML (and basically same lowest RMSE as fac.mod4)-- testing K 5 as well
+fac.model.cr.tw.k5 <- bam(count ~ interaction(size_bin, protection) + s(year, bs = "cr",k = 5) + s(year, by = size_bin, bs = "cr", k = 5) + s(year, by = protection, bs = "cr", k = 5) + s(year, by = interaction(size_bin, protection), bs = "cr", k = 5) + offset(log(plots_sampled)), data=sc_bin_fac_models, family=tw, method="REML")
+
+anova(fac.model.cr.tw.k5)
+summary(fac.model.cr.tw.k5)
+appraise(fac.model.cr.tw.k5)
+
+# REML is 4230, so we are going with original K of 20
+
+```
+
+
+
+# read the input data - this is the counts per site per size bin over time (editted PISCO data)
+```{r load data}
+LG_count_plot_mpa_F <- read_excel("LG.count.plot.mpa.F.xlsx")
+```
+
+
+```{r latitude GAM GI, echo=FALSE}
+LG_count_plot_mpa_F$size_bin <- as.factor(LG_count_plot_mpa_F$size_bin)
+
+count_modGI.log <- gam(count ~ size_bin + s(latitude) + s(year)+ s(latitude,by=size_bin)+
+                    ti(year, latitude, k=c(20, 20), m=2) +
+                    ti(year, latitude, by=size_bin, k=c(20, 20), m=1),
+                  data=LG_count_plot_mpa_F, family=nb(link="log"), method="REML", select=TRUE)
+
+```
+
+
+
+```{r latitude GAM S, echo=FALSE}
+count_modS.log <- gam(count ~  t2(year, latitude, size_bin, bs=c("tp", "tp", "re"), k=c(20, 10, 3), m=2), data=LG_count_plot_mpa_F, family=nb(link="log"), method="REML", select=TRUE)
+
+anova(count_modS.log)
+summary(count_modS.log)
+
+```
+
+
+```{r latitude GAM I, echo=FALSE}
+count_modI.log <- gam(count ~ size_bin + s(latitude) + s(year)+ s(latitude,by=size_bin)+
+                    ti(year, latitude, by=size_bin, k=c(20, 20), m=1),
+                  data=LG_count_plot_mpa_F, family=nb(link="log"), method="REML", select=TRUE)
+
+anova(count_modI.log)
+summary(count_modI.log)
+
+```
+
+
+```{r compare year lat models}
+GI<-sqrt(mean(residuals(count_modGI.log)^2)) #1.030752
+S<-sqrt(mean(residuals(count_modS.log)^2))   #1.034044
+I<-sqrt(mean(residuals(count_modI.log)^2))   #1.036623
+
+#REMLs of models
+GI=16146, dev expl=34.2%
+S= 16238, dev expl=30.9%
+I= 16182, dev expl=30.4%
+
+#GI model has the lowest scores, so going with that one. Testing K=10 and K=5..
+```
+
+```{r latitude GAM GI test K, echo=FALSE}
+LG_count_plot_mpa_F$size_bin <- as.factor(LG_count_plot_mpa_F$size_bin)
+
+count_modGI.k10 <- gam(count ~ size_bin + s(latitude) + s(year)+ s(latitude,by=size_bin)+
+                    ti(year, latitude, k=c(10, 10), m=2) +
+                    ti(year, latitude, by=size_bin, k=c(10, 10), m=1),
+                  data=LG_count_plot_mpa_F, family=nb(link="log"), method="REML", select=TRUE)
+
+count_modGI.k5 <- gam(count ~ size_bin + s(latitude) + s(year)+ s(latitude,by=size_bin)+
+                    ti(year, latitude, k=c(5, 5), m=2) +
+                    ti(year, latitude, by=size_bin, k=c(5, 5), m=1),
+                  data=LG_count_plot_mpa_F, family=nb(link="log"), method="REML", select=TRUE)
+
+
+summary(count_modGI.k10) #Deviance explained = 29.8% -REML =  16177 
+summary(count_modGI.k5) #eviance explained = 26.5% -REML =  16206
+
+k10<-sqrt(mean(residuals(count_modGI.k10)^2)) #1.040299
+k5<-sqrt(mean(residuals(count_modGI.k5)^2)) #1.045676
+
+```
+
+```{r GAM GI mod outputs, echo=FALSE}
+draw(count_modGI.log)
+
+draw(count_modGI.log, select = smooths(count_modGI.log)[1]) #can select the different smooths you want to plot here
+draw(count_modGI.log, select = smooths(count_modGI.log)[9], dist = 0.15) #increase dist to fill the extrapolated space on plot
+
+anova(count_modGI.log)
+summary(count_modGI.log)
+
+pdf("GAM.year.lat.appraise.pdf")
+appraise(count_modGI.log)
+dev.off()
+```
+
