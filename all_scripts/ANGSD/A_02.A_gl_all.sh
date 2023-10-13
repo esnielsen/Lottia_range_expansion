@@ -20,9 +20,9 @@ module load anaconda3
 eval "$(conda shell.bash hook)"
 conda activate ANGSD
 
-#prepare variables
+#prepare variables (using config file - dont need to use if you'd rather just input minimum individual/depth parameters)
 NB_CPU=30 #change accordingly in SLURM header
-source A_01.A_config.sh
+source A_01.A_config.sh 
 N_IND=$(wc -l 02_info/bam.filelist | cut -d " " -f 1) #change bam.filelist accordingly
 MIN_IND_FLOAT=$(echo "($N_IND * $PERCENT_IND)"| bc -l)
 MIN_IND=${MIN_IND_FLOAT%.*} 
