@@ -4,6 +4,7 @@
 
 setwd("~//ocean/projects/deb200006p/enielsen/LGwork/angsd/03_saf_maf_gl_all")
 
+#just edit input file in chunk below
 glf <- read.table(file = 'ALL_2_maf0.05_pctind0.5_maxdepth15.beagle.gz', header=TRUE)[,-c(1:3)]
 glf <- array(c(t(as.matrix(glf))), c(3, ncol(glf)/3, nrow(glf)))
 EMstep <- function (sfs, GL) rowMeans(prop.table(sfs * GL, 2))
@@ -27,7 +28,7 @@ for(sample in 1:dim(glf)[2])
 
 
 
-#populations with their respective columns of the SFS
+#list populations with their respective columns of the SFS - edit column values based on number of individuals per population
 print(c('KR',round(summary(SFS[2,1:30]),4)),quote=F)
 print(c('FR',round(summary(SFS[2,31:60]),4)),quote=F)
 print(c('BB',round(summary(SFS[2,61:90]),4)),quote=F)
@@ -44,7 +45,7 @@ print(c('SH',round(summary(SFS[2,360:389]),4)),quote=F)
 print(c('SC',round(summary(SFS[2,390:419]),4)),quote=F)
 print(c('CB',round(summary(SFS[2,420:449]),4)),quote=F)
 
-#
+# get values per population
 sfs=SFS[2,1:30]
 Site=replicate(30, "KR")
 KR=data.frame(sfs, Site)
@@ -105,7 +106,7 @@ Site=replicate(30, "CB")
 sfs=SFS[2,420:449]
 DB=data.frame(sfs, Site)
 
-
+#combine all population values
 All=rbind(KR,FR,BB,DB,HP,CR,SB,VN,GP,CA,WA,IP,SH,SC,CB, PB, SR,BT,BA)
 write.table(ALL, 'pop.het.txt')
 
