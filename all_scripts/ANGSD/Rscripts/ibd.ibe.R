@@ -1,6 +1,8 @@
-## Mantel tests for Isolation by Distance/Environment
+### Mantel tests for Isolation by Distance/Environment
 setwd("~/Desktop/PD_stuffies/IBD")
 library(ecodist)
+library(readxl)
+library(ggplot2)
 
 #read geographic distance matrix:
 geo_dist <- read_excel("geo.dist.xlsx", sheet = "Sheet2",  col_names = FALSE)
@@ -28,6 +30,27 @@ fst.l = apply(fsts, 2, linearize)
 #mantel test
 fst.man.l <- mantel(as.dist(fst.l) ~ as.dist(geo.mat.log), nperm = 999)
 fst.man.l
+
+
+#### make IBD plot colored by clusters
+eDist <- as.matrix(geo.mat.log)
+gDist <- as.matrix(fst.l)
+df <- data.frame( Genetic_Distance = gDist[lower.tri(gDist)],
+                  Slope_Distance = eDist[ lower.tri(eDist)])
+df <- df[ !is.infinite(df$Slope_Distance),]
+
+write.table(df, "IBD.plot.clust.txt", sep="\t", row.names=FALSE)
+IBD_plot_clust <- read_excel("IBD.plot.clust.xlsx", 
+       col_types = c("numeric", "numeric", "skip", 
+      "text"))
+
+colors=c( "#B3EE3A", "#FFA500","#36648B", "#CD69C9")
+colScale <- scale_colour_manual(name = "Cluster1",values = colors)
+
+pdf("IBD.2color.plot.pdf")
+ggplot(IBD_plot_clust,aes(x=Slope_Distance,y=Genetic_Distance)) + geom_point(aes(colour = Cluster1, size=1.8)) + geom_point(aes(colour = Cluster2, size=1.6)) + 
+  stat_smooth(method=lm, formula = y ~ x, colour="black") + xlab("log(geographic distance") + ylab("FST/(1-FST")+ theme_minimal()+ colScale
+dev.off()
 
 # Read environmental variables dataframe, and create matrices per variable:
 env.vars <- read.table("env.per.site.txt", header = T)
@@ -59,4 +82,4 @@ qobj
 
 #do mantel test with dartR with built in plotting
 library(dartR)
-ibd <- gl.ibd(x = NULL, Dgen = fsts, Dgeo = geo.mat, Dgeo_trans='log(Dgeo)', Dgen_trans='Dgen/(1-Dgen)')
+ibd <- gl.ibd(x = NULL, Dgen = fsts, Dgeo = geo.mat, Dgeo_trans='log(Dgeo)', Dgen_trans='Dgen/(1-Dgen)')+ theme_dartR(base_size=5)
