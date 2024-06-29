@@ -6,7 +6,7 @@ Download raw fastq reads from NCBI, under the BioProject accession number: PRJNA
 
 Download the Lottia gigantea reference sequence using NCBI RefSeq assembly code: GCF_000327385.1. Put in a directory called "03_genome".
 
-Next, go into the directory in this repository called 'all_scripts'. Run the following bash scripts within this directory in this order (all of the outputs should feed as input files for the following step):
+Now go into directory in this github repository called 'all_scripts'. Run the following bash scripts within this directory in this order (all of the outputs should feed as input files for the following step):
 
 *fastQC.sh* - Will run the program fastQC to give quality reports on raw reads.. this is done per individual fastq files
 
