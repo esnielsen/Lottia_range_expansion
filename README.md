@@ -6,7 +6,7 @@ Download raw fastq reads from NCBI, under the BioProject accession number: PRJNA
 
 Download the Lottia gigantea reference sequence using NCBI RefSeq assembly code: GCF_000327385.1. Put in a directory called "03_genome".
 
-Now go into directory in this github repository called 'all_scripts'. Run the following bash scripts within this directory in this order (all of the outputs should feed as input files for the following step):
+Now go into directory in this github repository called 'Lottia_range_expansion/all_scripts'. Run the following bash scripts within this directory in this order (all of the outputs should feed as input files for the following step):
 
 *fastQC.sh* - Will run the program fastQC to give quality reports on raw reads.. this is done per individual fastq files
 
@@ -53,7 +53,7 @@ Now run the following scripts in this order:
 
 *A_04.B_admix_all.sh* - Second step of NGSadmix, output the log file for plotting in R
 
-Go into ANGSD/Rscripts and run '*k.plot.admix.R*' - Will plot outputs from the log files of NGSadmix
+Go into Lottia_range_expansion/all_scripts/ANGSD/Rscripts and run '*k.plot.admix.R*' - Will plot outputs from the log files of NGSadmix
 
 ### Prune SNPs in linkage disequlibrium
 Back into ANGSD directory.. *A_05_gl_for_plink.sh* - Call SNPs again with ANGSD, but now output as plink file to do linkage disequlibrium filtering
@@ -119,11 +119,76 @@ Then run the following scripts to generate theta for synonymous and missense SNP
 
 
 ### Minor Allele in Highest Frequency
-Go back into ANGSD/Rscripts directory and run:
+Go back into Lottia_range_expansion/all_scripts/ANGSD/Rscripts directory and run:
 
 *MAHF.R* - will calculate MAHF values per population
 
 ### Gene flow with FEEMS
+Go into the directory: Lottia_range_expansion/all_scripts/ANGSD/migration_analyses/FEEMS/ & run the following:
+*feems.grid.R* - create the spatial grid for FEEMs to run on (using the shapefile within the directory)
+
+*feems_1.sh* - Run feems analysis (using python script: feems_run.py)
+
+*feems_2.sh* - Run cross validation of feems analysis (using python script: feems_cv.py)
+
+### GRRF Population Assignment
+Go into the directory: Lottia_range_expansion/all_scripts/ANGSD/pop_assignment/  & run the following:
+
+*GRRF.plink.recode.sh* - Recode the plink output from ANGSD to create input file for GRRF
+
+*grrf_R.sh* - Run GRRF R script, which will identify SNPs delineating source populations and use them to assign unknown individuals to those source populations
+
+*GRRF.assign.plot.R* - Plot the results from the GRRF models
+
+### Opendrift larval simulation models
+Go into the directory: Lottia_range_expansion/all_scripts/opendrift & run the following: 
+
+(will need to download environmental data from Copernicus: https://data.marine.copernicus.eu/products - too large to store here)
+
+*opdrift.sh* - Runs the opendrift (note there's separate scripts for northern or southern seeded sites - I was too lazy to write a script to loop through the sites so I edited them manually)
+
+*opdrift.plot.R* - Plot opendrift results
+
+### Moments demographic models
+
+Go into the directory: Lottia_range_expansion/all_scripts/ANGSD/AFS_Moments/
+
+Run the scripts in the following order: *M1_create_sfs1.sh* -> *M2_create_sfs2.sh* -> *M3_create_boot.sh* -> *M4_run_boot.sh* -> *M5_bagging.sh* -> *M6_modsel_write.sh* -> *M7_run_models.sh* -> *M8_mod_summ.sh* -> *M9_best_mod_boot.sh* -> *M10_best_mod_summ.sh* 
+
+Then run this script to get summary of best model: *bestBoot_summary.EN.2.R*
+
+Note that I ran all  the above code separately for the 2 comparisons (Baja vs. South & Central vs. North)
+
+### Stairway
+Go into the directory: Lottia_range_expansion/all_scripts/ANGSD/stairway & run the following: 
+
+*stair_01_sfs.sh* - Create dadi input files from SFS
+
+*stair_02_1dSFS.R* - Take the .dat file from stair_01_sfs.sh and calculated the 1-pop SFS from it
+
+*stair_03_build_BP.sh* - Build the blueprint files per population
+
+*stair_04_run.sh* - Run stairway analysis
+
+*stair_05_plot.sh* - Create output files to plot
+
+*stair_06_plot.R* - Plot output files
+
+
+### LD decay
+Go into the directory: Lottia_range_expansion/all_scripts/ANGSD/LD & run the following: 
+
+*ld_decay_py.sh* - calculate LD decay with ld_decay_calc.py python script
+
+*ld_decay_plot.R* - To plot LD decay from plink and M. Ravinet python scripts
+
+### SDMs
+
+Run the R script in the directory: all_scripts/SDMs/LG.sdms.R 
+
+
+
+
 
 
 
