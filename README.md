@@ -81,14 +81,49 @@ Back into ANGSD directory.. *A_05_gl_for_plink.sh* - Call SNPs again with ANGSD,
 
 *A_13C_fst_pop.sh* - Final step in calculating per-site Fsts (acutally calculate for each pairwise comparison)
 
-### Genetic diversity (theta)
+### Genetic diversity (theta, pi, D)
 *A_14A_thetas.sh* - First step in calculating Watterson's theta (create sfs)
 
 *A_14B_thetas_R.sh* - Second step in calculating Watterson's theta (R script to help us summarise the output)
 
 *A_14C_thetas.sh* - Final step in calculating Watterson's theta (calculate theta with ANGSD per population)
 
+### Genetic diversity (expected heterozygosity)
+Go into Rscripts directory and run *pop.het.R* - Will take the beagle output from ANGSD (same used to run PCA) and calculate per-site He values
 
+### Isolation by distance
+Go into Rscripts directory and run *ibe.ibd.R* - Will run IBD analyses (geo dist and fst dist matrices are in this directory)
+
+### Genetic load (θN/θS)
+*A_21_vep_vcf.sh* - Run ANGSD again and get vcf output (which is input for ensembl’s variant effect predictor, VEP)
+
+Go into github repo directory titled "genetic_load" (From ANGSD directory) and run scripts in this order:
+
+*01_edit.gff.sh* - Edit the reference genome .gff file coding
+
+*02.A_sort.1.gff.sh* - Sort the genome part 1
+
+*02.B_sort.2.gff.sh* - Part 2 of processing the .gff genome file
+
+*03_ensem_vep.sh* - Run ensembl’s variant effect predictor
+
+*04_filt_vep_out.sh* - Edit the output files
+
+Then run the following scripts to generate theta for synonymous and missense SNPs from VEP:
+
+*05_miss.syn1_angsd.sh*
+
+*05_miss.syn2_sfs.sh*
+
+*05_miss.syn3_theta.sh*
+
+
+### Minor Allele in Highest Frequency
+Go back into ANGSD/Rscripts directory and run:
+
+*MAHF.R* - will calculate MAHF values per population
+
+### Gene flow with FEEMS
 
 
 
