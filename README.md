@@ -5,6 +5,8 @@ Corresponding miro board of full pipeline can be found here: https://miro.com/we
 
 The following is a combination of bash, R, and python code written/adapted by Erica Nielsen with Rachael Bay at UC Davis. We ran the following on the Pittsburgh Supercomputing Center's Bridges2 servers. 
 
+
+
 ## Part 1 - Download data and call single nucleotide polymorphisms
 Download raw fastq reads from NCBI, under the BioProject accession number: PRJNA1075458 (https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1075458/). This contains low coverage whole genome sequencing data for 19 populations, with roughly 30 individuals sampled per population. Upload these raw reads into a directory titled "rawdata/fastqs". 
 
@@ -121,11 +123,12 @@ Then run the following scripts to generate theta for synonymous and missense SNP
 
 *05_miss.syn3_theta.sh*
 
-
 ### Minor Allele in Highest Frequency
 Go back into Lottia_range_expansion/all_scripts/ANGSD/Rscripts directory and run:
 
 *MAHF.R* - will calculate MAHF values per population
+
+## Part 3 - Additional demographic analyses (i.e. gene flow, migration, estimated population size changes)
 
 ### Gene flow with FEEMS
 Go into the directory: Lottia_range_expansion/all_scripts/ANGSD/migration_analyses/FEEMS/ & run the following:
