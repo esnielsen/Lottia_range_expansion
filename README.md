@@ -1,5 +1,5 @@
 # Lottia_range_expansion
-Pipeline used to analyze Lottia gigantea whole genome sequencing data, for publication titled "Pushed waves, trailing edges, and extreme events: Eco-evolutionary dynamics of a geographic range shift in the owl limpet, Lottia gigantea". 
+Pipeline used to analyze *Lottia gigantea* whole genome sequencing data, for publication titled "Pushed waves, trailing edges, and extreme events: Eco-evolutionary dynamics of a geographic range shift in the owl limpet, Lottia gigantea". 
 
 Corresponding miro board of full pipeline can be found here: https://miro.com/welcomeonboard/THE0eXpPUXMxcVFnNHd6OENtYXdMZk1NRTd6SEFzbHdFZTl2a25OSHh6TmQ1OFF5NFcyQU9lUkpRck96YlZObXwzNDU4NzY0NTI0MDc1NzU3Mjc0fDI=?share_link_id=714947409411
 
