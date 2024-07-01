@@ -2,7 +2,7 @@
 Pipeline used to analyze Lottia gigantea whole genome sequencing data, for publication titled "Pushed waves, trailing edges, and extreme events: Eco-evolutionary dynamics of a geographic range shift in the owl limpet, Lottia gigantea". Corresponding miro board of full pipeline can be found here: https://miro.com/welcomeonboard/THE0eXpPUXMxcVFnNHd6OENtYXdMZk1NRTd6SEFzbHdFZTl2a25OSHh6TmQ1OFF5NFcyQU9lUkpRck96YlZObXwzNDU4NzY0NTI0MDc1NzU3Mjc0fDI=?share_link_id=714947409411
 
 ## Part 1 - Download data and call single nucleotide polymorphisms
-Download raw fastq reads from NCBI, under the BioProject accession number: PRJNA1075458. This contains low coverage whole genome sequencing data for 19 populations, with roughly 30 individuals sampled per population. Upload these raw reads into a directory titled "rawdata/fastqs". 
+Download raw fastq reads from NCBI, under the BioProject accession number: PRJNA1075458 (https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1075458/). This contains low coverage whole genome sequencing data for 19 populations, with roughly 30 individuals sampled per population. Upload these raw reads into a directory titled "rawdata/fastqs". 
 
 Download the Lottia gigantea reference sequence using NCBI RefSeq assembly code: GCF_000327385.1. Put in a directory called "03_genome".
 
