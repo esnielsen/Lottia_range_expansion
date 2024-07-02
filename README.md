@@ -156,6 +156,8 @@ Go into the directory: Lottia_range_expansion/all_scripts/opendrift & run the fo
 
 *opdrift.plot.R* - Plot opendrift results
 
+Outputs for models run based on larval settlements from larvae raisted in 12C and 18C are in the /12C and /18C directories, respectively
+
 ### Moments demographic models
 
 Go into the directory: Lottia_range_expansion/all_scripts/ANGSD/AFS_Moments/
@@ -192,6 +194,8 @@ Go into the directory: Lottia_range_expansion/all_scripts/ANGSD/LD & run the fol
 ### SDMs
 
 Run the R script in the directory: all_scripts/SDMs/LG.sdms.R 
+
+Output files are in the output directory
 
 
 
