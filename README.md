@@ -166,7 +166,7 @@ Run the scripts in the following order: *M1_create_sfs1.sh* -> *M2_create_sfs2.s
 
 Then run this script to get summary of best model: *bestBoot_summary.EN.2.R*
 
-Note that I ran all  the above code separately for the 2 comparisons (Baja vs. South & Central vs. North)
+Note that I ran all  the above code separately for the 2 comparisons (Baja vs. South & Central vs. North). Outputs for Baja vs. South have the prefix "CA.s.Mex." and outputs of Central vs. North have the prefix "CA.n.c."
 
 ### Stairway
 Go into the directory: Lottia_range_expansion/all_scripts/ANGSD/stairway & run the following: 
